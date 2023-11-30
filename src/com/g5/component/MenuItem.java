@@ -5,7 +5,6 @@
  */
 package com.g5.component;
 
-import com.g5.event.EventMenuSelected;
 import com.g5.util.Auth;
 import java.awt.AlphaComposite;
 import java.awt.Color;
