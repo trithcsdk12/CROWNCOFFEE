@@ -232,8 +232,8 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
                 setStatus(false);
-                if (!Main.isOpen()) {
-                    Main.setStatus(true);
+                if (!MainFrame.isOpen()) {
+                    MainFrame.setStatus(true);
                 }
                 // Main.setStatus(true);
                 //      System.out.println("ok");

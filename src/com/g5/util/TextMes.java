@@ -1,6 +1,6 @@
 package com.g5.util;
 
-import com.g5.ui.Main;
+import com.g5.ui.MainFrame;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;

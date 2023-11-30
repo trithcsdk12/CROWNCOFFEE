@@ -209,7 +209,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
     private void btnTroLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroLaiActionPerformed
         // TODO add your handling code here:
         setStatus(false);
-        Main.setStatus(true);
+        MainFrame.setStatus(true);
     }//GEN-LAST:event_btnTroLaiActionPerformed
 
     /**

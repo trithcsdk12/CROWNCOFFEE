@@ -35,9 +35,12 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
  *
  * @author anhba
  */
-public class Main extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
     
-    private static Main mainFrame = new Main();
+    public static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(MainFrame.class);
+
+    
+    private static MainFrame mainFrame = new MainFrame();
     private Menu menu = new Menu();
     private JPanel main = new JPanel();
     private MigLayout layout;
@@ -45,7 +48,7 @@ public class Main extends javax.swing.JFrame {
     private boolean menuShow;
     public static boolean logOut = false;
     
-    public Main() {
+    public MainFrame() {
         this.setUndecorated(true);
         initComponents();
         init();
@@ -156,14 +159,14 @@ public class Main extends javax.swing.JFrame {
         menu.addEventButtonMini(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                Main.this.setState(Frame.ICONIFIED);
+                MainFrame.this.setState(Frame.ICONIFIED);
                 //    Main.this.dispose();
             }
         });
         menu.addEventButtonMini(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                Main.this.setState(Frame.ICONIFIED);
+                MainFrame.this.setState(Frame.ICONIFIED);
                 //    Main.this.dispose();
             }
         });
@@ -271,12 +274,12 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void loadFormMenu() {
-        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(Main.class.getResource("/com/g5/image/Home_2.png"))));
-        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(Main.class.getResource("/com/g5/image/Person_1.png"))));
-        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(Main.class.getResource("/com/g5/image/Bill.png"))));
-        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(Main.class.getResource("/com/g5/image/Box.png"))));
-        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(Main.class.getResource("/com/g5/image/Voucher_1.png"))));
-        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(Main.class.getResource("/com/g5/image/Combo_Chart.png"))));
+        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Home_2.png"))));
+        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Person_1.png"))));
+        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Bill.png"))));
+        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Box.png"))));
+        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Voucher_1.png"))));
+        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Combo_Chart.png"))));
         
     }
     
@@ -329,7 +332,7 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void run() {
                 if (openDangNhap()) {
-                    
+                    logger.info("Người dùng [" + Auth.user.getMaNV() + "]: "+Auth.user.getHoTen()+" đã đăng nhập vào hệ thống");
                     setStatus(true);
                 };
             }

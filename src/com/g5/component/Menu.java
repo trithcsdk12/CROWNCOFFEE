@@ -5,7 +5,7 @@
  */
 package com.g5.component;
 
-import com.g5.ui.Main;
+import com.g5.ui.MainFrame;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import java.awt.Color;

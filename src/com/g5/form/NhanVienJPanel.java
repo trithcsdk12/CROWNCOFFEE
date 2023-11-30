@@ -7,7 +7,7 @@ package com.g5.form;
 
 import com.g5.entity.NhanVien;
 import com.g5.entityDAO.NhanVienDAOImpl;
-import com.g5.ui.Main;
+import com.g5.ui.MainFrame;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import com.g5.util.XDate;
