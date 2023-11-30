@@ -24,7 +24,13 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
             + "values (?,?,?,?,?,?,?,?,?,?)";
     String update = "Update NhanVien set HoTen=?, MatKhau=?, SDT=?, Email=?, GioiTinh=?, VaiTro=?, NgaySinh=?, DiaChi =?, TrangThai =?, Hinh = ? where MaNV =?";
     String delete = "Delete from NhanVien where MaNV = ?";
-    String selectLast = "select * from NhanVien order by MaNV desc";
+    String selectLast = "{call MaxMaNV()}";
+//    create or alter proc MaxMaNV
+//as
+//begin
+//SELECT MAX(Manv) as Max
+//FROM NhanVien
+//end
 
     @Override
     public NhanVien getByID(Integer maNV) {
@@ -32,9 +38,16 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    public NhanVien getByIDLast() {
-        List<NhanVien> list = select(selectLast);
-        return list.size() > 0 ? list.get(0) : null;
+    public int getMaxMaNV() {
+        ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(selectLast);
+            rs.next();
+            return rs.getInt("Max");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
@@ -43,12 +56,12 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     }
 
     @Override
-    public Integer create(NhanVien nhanVien) {
-    
+    public Integer create(NhanVien nhanVien
+    ) {
+
         try {
             JDBCHelper.executeUpdate(insert,
                     nhanVien.getHoTen(),
-              
                     nhanVien.getMatkhau(),
                     nhanVien.getSDT(),
                     nhanVien.getEmail(),
@@ -58,7 +71,6 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
                     nhanVien.getDiachi(),
                     nhanVien.getTrangthai(),
                     nhanVien.getHinh()
-                          
             );
 
             return nhanVien.getMaNV();
@@ -69,24 +81,26 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     }
 
     @Override
-    public void update(NhanVien nhanVien) {
+    public void update(NhanVien nhanVien
+    ) {
         JDBCHelper.executeUpdate(update,
-                    nhanVien.getHoTen(),
-                    nhanVien.getMatkhau(),
-                    nhanVien.getSDT(),
-                    nhanVien.getEmail(),
-                    nhanVien.isGioitinh(),
-                    nhanVien.getVaitro(),
-                    nhanVien.getNgaysinh(),
-                    nhanVien.getDiachi(),
-                    nhanVien.getTrangthai(),
-                    nhanVien.getHinh(),
-                    nhanVien.getMaNV()
+                nhanVien.getHoTen(),
+                nhanVien.getMatkhau(),
+                nhanVien.getSDT(),
+                nhanVien.getEmail(),
+                nhanVien.isGioitinh(),
+                nhanVien.getVaitro(),
+                nhanVien.getNgaysinh(),
+                nhanVien.getDiachi(),
+                nhanVien.getTrangthai(),
+                nhanVien.getHinh(),
+                nhanVien.getMaNV()
         );
     }
 
     @Override
-    public void deteleByID(Integer id) {
+    public void deteleByID(Integer id
+    ) {
         JDBCHelper.executeUpdate(delete, id);
     }
 
@@ -101,7 +115,7 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
                     list.add(model);
                 }
             } finally {
-            //    rs.getStatement().getConnection().close();
+                //    rs.getStatement().getConnection().close();
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
