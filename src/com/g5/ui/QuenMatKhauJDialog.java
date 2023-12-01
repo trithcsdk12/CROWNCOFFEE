@@ -9,6 +9,7 @@ import com.g5.DAO.NhanVienDAOinterface;
 import com.g5.entity.NhanVien;
 import com.g5.entityDAO.NhanVienDAOImpl;
 import com.g5.util.Auth;
+import com.g5.util.TextMes;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -41,7 +42,8 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        btnTroLai.setOpaque(false);
+        
+        btnTiepTuc.setEnabled(false);
         setResizable(false);
 //        addEvenBack(new MouseAdapter() {
 //            @Override
@@ -54,12 +56,24 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
     }
 
     static void setStatus(boolean bl) {
+        qmkJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                //  MainFrame.exitForm();
+                System.exit(0);
+
+            }
+        });
         if (!bl) {
             qmkJDialog.dispose();
         }
         qmkJDialog.setVisible(bl);
     }
-
+    private static int manv = 0;
+    
+    public static int getMaNV(){
+    return manv;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,7 +132,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
             }
         });
 
-        txtEmail.setText("tvugiang@gmail.com");
+        txtEmail.setText("vidu@gmail.com");
 
         txtTaiKhoan.setText("NV1");
 
@@ -241,6 +255,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
 
     void layLaiTK() {
         if (txtEmail.getText().trim().isEmpty() || txtTaiKhoan.getText().trim().isEmpty()) {
+            TextMes.Alert(this, "Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
@@ -251,15 +266,23 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
             return;
         }
         for (NhanVien nhanVien : nvList) {
-            if (tk.equalsIgnoreCase(Auth.accountNV(String.valueOf(nhanVien.getMaNV())))) {
-                String xnmk = Auth.accountXNNV(String.valueOf(nhanVien.getMaNV()));
-                //  doiMatKhauDialog.setmaNV(xnmk);
-                if (gmail.equalsIgnoreCase(nhanVien.getEmail())) {
-   
-                    send();
+            if (tk.equalsIgnoreCase((String.valueOf(nhanVien.getMaNV())))) {
 
+                if (gmail.equalsIgnoreCase(nhanVien.getEmail())) {
+
+                    send();
+                    TextMes.Alert(this, "Đã gửi mã xác nhận bạn vui lòng kiểm tra gmail");
+                    btnTiepTuc.setEnabled(true);
+                    manv = nhanVien.getMaNV();
+                    break;
+                } else {
+                    TextMes.Alert(this, "Tài khoản và gmail không có trên hệ thống");
+                    break;
                 }
 
+            } else {
+                TextMes.Alert(this, "Tài khoản và gmail không có trên hệ thống");
+                break;
             }
 
         }
@@ -275,8 +298,8 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
-        String tk = "tvugiang@gmail.com";
-        String mk = "vbcrhdgkparvwbyv";
+        String tk = "anhbao5cm@gmail.com";
+        String mk = "zoexwqhkrfeimkra";
 
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
@@ -296,11 +319,9 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
             message.setSubject("Lấy lại tài khoản");// Tiêu đề tin nhắn
             OTP = ranDom.nextInt(9000) + 1000;
 //            forgotpass(rdpass, mk);
-            message.setText("Tài khoản và Mã OTP:\n Tài khoản: " + txtTaiKhoan.getText().trim() + "\n Mã OTP: " + OTP);// Nội dung tin nhắn
+            message.setText("Tài khoản và Mã OTP:\nTài khoản: " + txtTaiKhoan.getText().trim() + "\n Mã OTP: " + OTP);// Nội dung tin nhắn
 
             Transport.send(message);
-
-        
 
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -313,6 +334,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
 
             //   doiMatKhauDialog.setVisible(true);
             this.dispose();
+            new XacNhanMatKhauJDiaLog(null, true).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Mã xác nhận không đúng");
             return;

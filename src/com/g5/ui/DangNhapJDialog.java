@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import com.g5.DAO.NhanVienDAOinterface;
 import java.awt.Color;
 import javax.swing.JFrame;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.swing.JFrame;
 public class DangNhapJDialog extends javax.swing.JDialog {
 
     private static DangNhapJDialog dnJDialog = new DangNhapJDialog(new javax.swing.JFrame(), true);
+    public static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(MainFrame.class);
 
     /**
      * Creates new form DangNhapJDialog
@@ -38,14 +40,27 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 setStatus(false);
                 QuenMatKhauJDialog.setStatus(true);
+
             }
 
         });
+
+        PropertyConfigurator.configure("src/com/g5/log/log4j.properties");
+
     }
 
     static void setStatus(boolean bl) {
+        dnJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                //  MainFrame.exitForm();
+                System.exit(0);
+
+            }
+        });
         if (!bl) {
             dnJDialog.dispose();
+
         }
         dnJDialog.setVisible(bl);
     }
@@ -234,6 +249,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 setStatus(false);
                 if (!MainFrame.isOpen()) {
                     MainFrame.setStatus(true);
+                    logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " đã đăng nhập vào hệ thống");
                 }
                 // Main.setStatus(true);
                 //      System.out.println("ok");
@@ -287,13 +303,16 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 dnJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
+
                         System.exit(0);
+
                     }
                 });
                 setStatus(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap1;

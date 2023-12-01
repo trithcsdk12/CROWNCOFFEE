@@ -25,6 +25,8 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     String update = "Update NhanVien set HoTen=?, MatKhau=?, SDT=?, Email=?, GioiTinh=?, VaiTro=?, NgaySinh=?, DiaChi =?, TrangThai =?, Hinh = ? where MaNV =?";
     String delete = "Delete from NhanVien where MaNV = ?";
     String selectLast = "{call MaxMaNV()}";
+    String searchMaNV = "select * from nhanvien where MaNV like ?";
+    String searchName = "select * from nhanvien where Hoten like ?";
 //    create or alter proc MaxMaNV
 //as
 //begin
@@ -36,6 +38,16 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     public NhanVien getByID(Integer maNV) {
         List<NhanVien> list = select(selectByID, maNV);
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public List<NhanVien> selectByKeyword(String keyword) {
+
+        return select(searchMaNV, "%" + keyword + "%");
+    }
+
+    public List<NhanVien> selectByName(String keyword) {
+
+        return select(searchName, "%" + keyword + "%");
     }
 
     public int getMaxMaNV() {
@@ -139,13 +151,14 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
         return model;
     }
 
-    public void forgotpass(int rdpass, String manv) {
+    public void forgotpass(String rdpass, int manv) {
+
         String sql = "UPDATE NhanVien SET MatKhau=? WHERE MaNV=?";
         JDBCHelper.executeUpdate(sql,
-                rdpass,
+                rdpass.trim(),
                 manv
         );
-
+        
     }
 
 }

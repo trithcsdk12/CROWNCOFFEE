@@ -100,10 +100,9 @@ public class Menu extends javax.swing.JPanel {
             public void selected(int index) {
                 if (Auth.isLogin() && Auth.user.getVaitro() == 0 && index == 1) {
                     TrangChu(0);
-                
+
                     return;
                 }
-                
 
                 clearMenu(index);
                 repaint();
@@ -117,8 +116,6 @@ public class Menu extends javax.swing.JPanel {
         }
 
     }
-    
-
 
     public void TrangChu(int index) {
         for (Component com : panelMenu.getComponents()) {
@@ -130,6 +127,41 @@ public class Menu extends javax.swing.JPanel {
                 if (item.getIndex() != index) {
                     item.setSelected(false);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        repaint();
+
+    }
+
+    public Component MenuItemNhanVien() {
+        for (Component com : panelMenu.getComponents()) {
+            try {
+                MenuItem item = (MenuItem) com;
+                if (item.getIndex() == 1) {
+                    return item;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
+    public void RemoveMenu(int index) {
+        for (Component com : panelMenu.getComponents()) {
+            try {
+                MenuItem item = (MenuItem) com;
+                if (item.getIndex() == index) {
+                    item.setVisible(false);
+                 //   panelMenu.remove(com);
+                    break;
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

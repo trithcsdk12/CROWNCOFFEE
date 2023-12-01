@@ -35,8 +35,6 @@ public class Auth {
         return ("NV" + manv).trim();
     }
 
-    public static String accountXNNV(String manv) {
-        return manv.trim();
-    }
+
 
 }

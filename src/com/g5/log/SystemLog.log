@@ -1,0 +1,78 @@
+2023-11-30 20:31:52 INFO  MainFrame:336 - Người dùng [1]: Họ và tên 1 đã đăng nhập vào hệ thống
+2023-11-30 20:34:42 INFO  MainFrame:336 - Người dùng [Mã nhân viên: +1Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:35:12 INFO  MainFrame:336 - Người dùng [Mã nhân viên: | 1Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:35:32 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1| Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:35:44 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:43:50 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:44:08 INFO  NhanVienJPanel:442 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa cập nhật nhân viên :1
+2023-11-30 20:44:22 INFO  NhanVienJPanel:226 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa thêm nhân viên :1219
+2023-11-30 20:45:04 INFO  NhanVienJPanel:226 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa thêm nhân viên :1222
+2023-11-30 20:45:36 INFO  NhanVienJPanel:226 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa thêm nhân viên :1223
+2023-11-30 20:46:03 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1105
+2023-11-30 20:46:07 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1205
+2023-11-30 20:46:10 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1207
+2023-11-30 20:46:15 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1208
+2023-11-30 20:46:18 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1209
+2023-11-30 20:46:20 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1210
+2023-11-30 20:46:27 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1221
+2023-11-30 20:46:29 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1223
+2023-11-30 20:46:32 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1222
+2023-11-30 20:46:45 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1218
+2023-11-30 20:46:51 INFO  NhanVienJPanel:418 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa xóa nhân viên :1217
+2023-11-30 20:47:12 INFO  NhanVienJPanel:442 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa cập nhật nhân viên :1206
+2023-11-30 20:48:27 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 20:49:20 INFO  NhanVienJPanel:226 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa thêm nhân viên :1215
+2023-11-30 20:49:44 INFO  NhanVienJPanel:226 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] vừa thêm nhân viên :1225
+2023-11-30 20:50:39 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:00:46 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:01:14 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:02:48 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:06:36 INFO  MainFrame:336 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:07:06 INFO  MainFrame:330 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:11:07 INFO  MainFrame:331 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:11:47 INFO  MainFrame:333 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:12:59 INFO  MainFrame:334 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:13:05 INFO  MainFrame:186 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất vào
+2023-11-30 21:13:21 INFO  NhanVienJPanel:492 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] vừa cập nhật nhân viên :3
+2023-11-30 21:13:37 INFO  MainFrame:334 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:13:40 INFO  MainFrame:186 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất
+2023-11-30 21:18:14 INFO  MainFrame:337 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:18:17 INFO  MainFrame:189 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất
+2023-11-30 21:18:51 INFO  MainFrame:189 - Người dùng [Mã nhân viên: 3 | Họ tên: Họ và tên 3] đã đăng xuất
+2023-11-30 21:20:18 INFO  MainFrame:241 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:20:23 INFO  MainFrame:189 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất
+2023-11-30 21:20:27 INFO  MainFrame:241 - Người dùng [Mã nhân viên: 3 | Họ tên: Họ và tên 3] đã đăng nhập vào hệ thống
+2023-11-30 21:20:30 INFO  MainFrame:189 - Người dùng [Mã nhân viên: 3 | Họ tên: Họ và tên 3] đã đăng xuất
+2023-11-30 21:30:21 INFO  MainFrame:246 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:30:27 INFO  MainFrame:208 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất
+2023-11-30 21:43:33 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 21:43:36 INFO  MainFrame:210 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng xuất
+2023-11-30 21:43:40 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
+2023-11-30 21:43:54 INFO  NhanVienJPanel:492 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] vừa cập nhật nhân viên :1
+2023-11-30 21:43:57 INFO  MainFrame:210 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng xuất
+2023-11-30 22:16:48 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-11-30 22:18:32 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-12-01 16:33:28 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Họ và tên 1] đã đăng nhập vào hệ thống
+2023-12-01 16:44:34 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
+2023-12-01 16:45:09 INFO  NhanVienJPanel:492 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] vừa cập nhật nhân viên :1
+2023-12-01 16:45:16 INFO  MainFrame:210 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng xuất
+2023-12-01 16:45:20 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
+2023-12-01 16:45:33 INFO  NhanVienJPanel:492 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] vừa cập nhật nhân viên :1
+2023-12-01 16:45:46 INFO  MainFrame:210 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng xuất
+2023-12-01 16:47:30 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
+2023-12-01 16:51:19 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
+2023-12-01 16:52:02 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 16:52:21 INFO  NhanVienJPanel:492 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] vừa cập nhật nhân viên :1
+2023-12-01 16:52:45 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 16:55:52 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:00:04 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:00:49 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:02:36 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:04:28 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:06:05 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:07:05 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:07:43 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:15:36 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:16:23 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:17:42 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-01 17:19:22 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống

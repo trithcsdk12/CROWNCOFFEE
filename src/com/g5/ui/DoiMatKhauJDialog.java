@@ -31,6 +31,14 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
     }
 
     static void setStatus(boolean bl) {
+        dmkJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                //  MainFrame.exitForm();
+                System.exit(0);
+
+            }
+        });
         if (!bl) {
             dmkJDialog.dispose();
         }
