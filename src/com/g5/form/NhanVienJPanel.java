@@ -59,8 +59,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     public NhanVienJPanel() {
         initComponents();
         setOpaque(false);
-        
-        
+
         tblNhanVien.getTableHeader().setFont(new Font("Tohama", 1, 16));
         tblNhanVien.setRowMargin(1);
         btnThem.setEnabled(false);
@@ -72,27 +71,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         fillForm();
         init();
         PropertyConfigurator.configure("src/com/g5/log/log4j.properties");
-        
 
-        
 //        JViewport viewport = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, tblNhanVien);
 //                Rectangle rect = tblNhanVien.getCellRect(tblNhanVien.getRowCount() - 1, 0, true);
 //                viewport.scrollRectToVisible(rect);
-      
     }
 
     NhanVienDAOImpl nvDAO = new NhanVienDAOImpl();
 
-    void init(){
-            txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+    void init() {
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-              fillSearch();
+                fillSearch();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-               fillSearch();
+                fillSearch();
             }
 
             @Override
@@ -101,15 +97,15 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
     }
-    
-        void fillSearch() {
-            List<NhanVien> list;
-            if(rdoTKma.isSelected()){
-             list = nvDAO.selectByKeyword(txtTimKiem.getText().trim());
-            }else{
+
+    void fillSearch() {
+        List<NhanVien> list;
+        if (rdoTKma.isSelected()) {
+            list = nvDAO.selectByKeyword(txtTimKiem.getText().trim());
+        } else {
             list = nvDAO.selectByName(txtTimKiem.getText().trim());
-            }
-        
+        }
+
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         int i = 0;
@@ -128,8 +124,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{++i, nhanVien.getMaNV(), nhanVien.getHoTen(), nhanVien.getMatkhau(), nhanVien.getSDT(), nhanVien.getEmail(), nhanVien.isGioitinh() ? "Nam" : "Nữ", vaitro, XDate.toString(nhanVien.getNgaysinh(), "dd-MM-yyyy"), nhanVien.getDiachi(), nhanVien.getTrangthai() ? "Làm việc" : "Nghỉ việc", nhanVien.getHinh()});
 
         }
-        }
-    
+    }
+
     void fillTable() {
         List<NhanVien> list = nvDAO.getAll();
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
@@ -150,13 +146,12 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{++i, nhanVien.getMaNV(), nhanVien.getHoTen(), nhanVien.getMatkhau(), nhanVien.getSDT(), nhanVien.getEmail(), nhanVien.isGioitinh() ? "Nam" : "Nữ", vaitro, XDate.toString(nhanVien.getNgaysinh(), "dd-MM-yyyy"), nhanVien.getDiachi(), nhanVien.getTrangthai() ? "Làm việc" : "Nghỉ việc", nhanVien.getHinh()});
 
         }
-        
+
 //        if(i !=0){
 //            setForm(getTable(0));
 //               tblNhanVien.setRowSelectionInterval(0, 0);
 //    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(0, 0, true));
 //        }
-
     }
 
     boolean checkItMe() {
@@ -165,10 +160,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     void fillForm() {
         txtMaNV.setText(String.valueOf(nvDAO.getMaxMaNV() + 1));
-      
-        if (Auth.user.getVaitro() == 2) {
-            rdoQL.setVisible(true);
-        }
+
     }
 
     public void selectImage() {
@@ -201,24 +193,23 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     NhanVien getTable(int i) {
         int MaNV = -1;
-  
-       if(selected == false){
-          
-          if(i!=-1){
-          index = i;
-          }else{
-          index = tblNhanVien.getSelectedRow();
-          }
-      
-         MaNV = Integer.parseInt(tblNhanVien.getValueAt(index, 1).toString());
-       
-         }
-         if(selected == true){
-          MaNV = Integer.parseInt(tblNhanVien.getValueAt(index, 1).toString());
-          selected = false;
-         }
-         
-         
+
+        if (selected == false) {
+
+            if (i != -1) {
+                index = i;
+            } else {
+                index = tblNhanVien.getSelectedRow();
+            }
+
+            MaNV = Integer.parseInt(tblNhanVien.getValueAt(index, 1).toString());
+
+        }
+        if (selected == true) {
+            MaNV = Integer.parseInt(tblNhanVien.getValueAt(index, 1).toString());
+            selected = false;
+        }
+
         NhanVien nv = nvDAO.getByID(MaNV);
         nv.setMaNV(nv.getMaNV());
         nv.setHoTen(nv.getHoTen());
@@ -231,8 +222,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         nv.setSDT(nv.getSDT());
         nv.setNgaysinh(nv.getNgaysinh());
         nv.setTrangthai(nv.getTrangthai());
-        
-        return MaNV != -1?nv:null;
+
+        return MaNV != -1 ? nv : null;
     }
 
     NhanVien getForm() {
@@ -272,13 +263,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         fillTable();
         fillForm();
         clear(new NhanVien());
-        if(tblNhanVien.getRowCount() != 0){
-           tblNhanVien.setRowSelectionInterval(tblNhanVien.getRowCount() -1, tblNhanVien.getRowCount() -1);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(tblNhanVien.getRowCount() -1 , 0, true));
+        if (tblNhanVien.getRowCount() != 0) {
+            tblNhanVien.setRowSelectionInterval(tblNhanVien.getRowCount() - 1, tblNhanVien.getRowCount() - 1);
+            tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(tblNhanVien.getRowCount() - 1, 0, true));
         }
-         
+
         TextMes.Alert(this, "Thêm nhân viên mới thành công");
-                logger.info("Người dùng [Mã nhân viên: "+Auth.user.getMaNV()+ " | Họ tên: "+Auth.user.getHoTen()+"]"+" vừa thêm nhân viên :"+nv.getMaNV());
+        logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " vừa thêm nhân viên :" + nv.getMaNV());
     }
 
     void clear(NhanVien nv) {
@@ -294,34 +285,29 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         txtNgaySinh.setDate(nv.getNgaysinh() == null ? new Date() : new Date());
         txtSDT.setText(nv.getSDT());
         txtXNMatKhau.setText("");
-        
-        if(vaitroTK == 1){
-        rdoNV.setEnabled(true);
-        rdoQL.setEnabled(false);
-        rdoQL.setVisible(false);
-        rdoChu.setVisible(false);
-         rdoNV.setSelected(true);
+
+        if (vaitroTK == 1) {
+            rdoNV.setEnabled(true);
+            rdoQL.setEnabled(false);
+            rdoNV.setSelected(true);
         }
-        if(vaitroTK == 2){
-         rdoNV.setEnabled(true);
-        rdoQL.setEnabled(true);
-        rdoQL.setVisible(true);
-        rdoChu.setVisible(false);
-         rdoNV.setSelected(true);
+        if (vaitroTK == 2) {
+            rdoNV.setEnabled(true);
+            rdoQL.setEnabled(true);
+            rdoNV.setSelected(true);
         }
-        
-       
-        
+
         btnSua.setEnabled(false);
+
         btnThem.setEnabled(true);
         btnXoa.setEnabled(false);
         rdoLamViec.setSelected(true);
         rdoNam.setSelected(true);
+        rdoChu.setEnabled(false);
     }
 
-
-
     void setForm(NhanVien nv) {
+
         btnThem.setEnabled(false);
         btnMoi.setEnabled(true);
         txtMaNV.setText(nv.getMaNV() + "");
@@ -330,7 +316,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         txtXNMatKhau.setText(nv.getMatkhau().trim());
         txtEmail.setText(nv.getEmail().trim());
         txtSDT.setText(nv.getSDT().trim());
-        
+
         if (nv.isGioitinh()) {
             rdoNam.setSelected(true);
         } else {
@@ -378,28 +364,25 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
             lblHinh.setIcon(scaledIcon);
-            
+
             int vaitro = nv.getVaitro();
-            if(vaitro == 0){
-//                rdoChu.setVisible(false);
-//                rdoQL.setVisible(false);
-//                
-//                rdoNV.setVisible(true);
-            rdoNV.setSelected(true);
+            if (vaitro == 0) {
+                rdoChu.setEnabled(false);
+                rdoQL.setEnabled(false);
+                rdoNV.setEnabled(true);
+                rdoNV.setSelected(true);
             }
-            if(vaitro == 1){
-//                rdoChu.setVisible(false);
-//                rdoNV.setVisible(false);
-//                
-//                rdoQL.setVisible(true);
-//                rdoQL.setEnabled(true);
-            rdoQL.setSelected(true);
+            if (vaitro == 1) {
+                rdoChu.setEnabled(false);
+                rdoNV.setEnabled(false);
+                rdoQL.setEnabled(true);
+                rdoQL.setSelected(true);
             }
-            if(vaitro == 2){
-//                rdoChu.setVisible(true);
-//                rdoQL.setVisible(true);
-//              
-            rdoChu.setSelected(true);
+            if (vaitro == 2) {
+                rdoQL.setEnabled(false);
+                rdoNV.setEnabled(false);
+                rdoChu.setEnabled(true);
+                rdoChu.setSelected(true);
             }
 
             int maNVTK = Auth.user.getMaNV(); // 
@@ -411,7 +394,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 btnMoi.setEnabled(false);
                 return;
             }
-            switch(vaitroTK){
+            switch (vaitroTK) {
                 case 1:{///// tài khoản quản lí
                    
                     btnSua.setEnabled(true);
@@ -419,25 +402,44 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                    btnXoa.setEnabled(false);
                    btnSua.setEnabled(false);
                    btnThem.setEnabled(false);
+                   
+                   
                    }
                    if(vaitro == 0){
                     btnXoa.setEnabled(true);                   
                    }
+                   
                 break;
                 }
                 case 2:{//// tải khoản chủ
                     btnSua.setEnabled(true);
                     btnMoi.setEnabled(true);
                     btnXoa.setEnabled(true);
+                    
+
                    if(vaitro == 2 && nv.getMaNV() == maNVTK){
                    btnXoa.setEnabled(false);
                    btnSua.setEnabled(true);
                    btnThem.setEnabled(false);
+                   
+                   rdoQL.setEnabled(false);
+                   rdoNV.setEnabled(false);
                    }
                    if(vaitro == 2 && nv.getMaNV() != maNVTK){
                    btnXoa.setEnabled(false);
                    btnSua.setEnabled(false);
                    btnThem.setEnabled(false);
+                   
+                   rdoQL.setEnabled(false);
+                   rdoNV.setEnabled(false);
+                   }
+                   if(vaitro != 2){
+                   btnXoa.setEnabled(true);
+                   btnSua.setEnabled(true);
+                   btnThem.setEnabled(false);
+                   
+                   rdoNV.setEnabled(true);
+                   rdoQL.setEnabled(true);
                    }
                 break;
                 }
@@ -448,6 +450,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     btnMoi.setEnabled(true);
                 break;
                 }
+                
             }
 
         }
@@ -460,7 +463,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         }
         int id = Integer.parseInt(txtMaNV.getText().trim());
         NhanVien nv = nvDAO.getByID(id);
-        
+
         if (nv == null) {
             return;
         }
@@ -473,13 +476,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         fillTable();
         fillForm();
         clear(new NhanVien());
-        if(tblNhanVien.getRowCount()!=0){
-          tblNhanVien.setRowSelectionInterval(0, 0);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(0, 0, true));
+        if (tblNhanVien.getRowCount() != 0) {
+            tblNhanVien.setRowSelectionInterval(0, 0);
+            tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(0, 0, true));
         }
-         
+
         TextMes.Alert(this, "Đã xóa nhân viên: " + id);
-        logger.info("Người dùng [Mã nhân viên: "+Auth.user.getMaNV()+ " | Họ tên: "+Auth.user.getHoTen()+"]"+" vừa xóa nhân viên :"+id);
+        logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " vừa xóa nhân viên :" + id);
     }
 
     void updateNV() {
@@ -494,72 +497,71 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         fillTable();
         fillForm();
         clear(new NhanVien());
-              for (int i = 0; i < tblNhanVien.getRowCount(); i++) {
-            if(Integer.parseInt( (tblNhanVien.getValueAt(i, 1)+"").trim()) == nv.getMaNV()){
-               
-             tblNhanVien.setRowSelectionInterval(i, i);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(i, 0, true));
-    break;
+        for (int i = 0; i < tblNhanVien.getRowCount(); i++) {
+            if (Integer.parseInt((tblNhanVien.getValueAt(i, 1) + "").trim()) == nv.getMaNV()) {
+
+                tblNhanVien.setRowSelectionInterval(i, i);
+                tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(i, 0, true));
+                break;
             }
         }
         TextMes.Alert(this, "Cập nhật thành công");
-        logger.info("Người dùng [Mã nhân viên: "+Auth.user.getMaNV()+ " | Họ tên: "+Auth.user.getHoTen()+"]"+" vừa cập nhật nhân viên :"+nv.getMaNV());
-    
+        logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " vừa cập nhật nhân viên :" + nv.getMaNV());
+
     }
-    
 
-    
-
-    
-    void firstTable(){
-        if(tblNhanVien.getRowCount() == 0){
+    void firstTable() {
+        if (tblNhanVien.getRowCount() == 0) {
             clear(new NhanVien());
             return;
         }
-    index = 0;
+        index = 0;
 
-       tblNhanVien.setRowSelectionInterval(index, index);
-       tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
-        
-    selected = true;
-        setForm(getTable(-1));
-    }
-    void nextTable(){
-                if(tblNhanVien.getRowCount() == 0){
-            clear(new NhanVien());
-            return;
-        }
-    index++;
-    if(index>=tblNhanVien.getRowCount()){
-    index = tblNhanVien.getRowCount()-1;
-    }
-    tblNhanVien.setRowSelectionInterval(index, index);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
+        tblNhanVien.setRowSelectionInterval(index, index);
+        tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
+
         selected = true;
         setForm(getTable(-1));
     }
-    void backTable(){
-                if(tblNhanVien.getRowCount() == 0){
+
+    void nextTable() {
+        if (tblNhanVien.getRowCount() == 0) {
             clear(new NhanVien());
             return;
         }
-    index--;
-    if(index<=0){
-    index = 0;
-    }
-    tblNhanVien.setRowSelectionInterval(index, index);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
+        index++;
+        if (index >= tblNhanVien.getRowCount()) {
+            index = tblNhanVien.getRowCount() - 1;
+        }
+        tblNhanVien.setRowSelectionInterval(index, index);
+        tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
         selected = true;
         setForm(getTable(-1));
     }
-    void lastTable(){
-                if(tblNhanVien.getRowCount() == 0){
+
+    void backTable() {
+        if (tblNhanVien.getRowCount() == 0) {
             clear(new NhanVien());
             return;
         }
-    index = tblNhanVien.getRowCount()-1;
-    tblNhanVien.setRowSelectionInterval(index, index);
-    tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
+        index--;
+        if (index <= 0) {
+            index = 0;
+        }
+        tblNhanVien.setRowSelectionInterval(index, index);
+        tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
+        selected = true;
+        setForm(getTable(-1));
+    }
+
+    void lastTable() {
+        if (tblNhanVien.getRowCount() == 0) {
+            clear(new NhanVien());
+            return;
+        }
+        index = tblNhanVien.getRowCount() - 1;
+        tblNhanVien.setRowSelectionInterval(index, index);
+        tblNhanVien.scrollRectToVisible(tblNhanVien.getCellRect(index, 0, true));
         selected = true;
         setForm(getTable(-1));
     }
@@ -1121,7 +1123,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         insertNV();
 
-                    
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -1155,24 +1157,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private void btnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNActionPerformed
         // TODO add your handling code here:
-    
+
         nextTable();
-       
+
     }//GEN-LAST:event_btnNActionPerformed
 
     private void btnLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLActionPerformed
         // TODO add your handling code here:
-         lastTable();
+        lastTable();
     }//GEN-LAST:event_btnLActionPerformed
 
     private void btnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBActionPerformed
         // TODO add your handling code here:
-             backTable();
+        backTable();
     }//GEN-LAST:event_btnBActionPerformed
 
     private void btnFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFActionPerformed
         // TODO add your handling code here:
-            firstTable();
+        firstTable();
     }//GEN-LAST:event_btnFActionPerformed
 
 
