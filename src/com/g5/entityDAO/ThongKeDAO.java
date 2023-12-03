@@ -7,6 +7,7 @@ package com.g5.entityDAO;
 import com.g5.util.JDBCHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,18 +15,23 @@ import java.util.List;
 
 public class ThongKeDAO {
 
-    public List<Object[]> getHoaDon(Date ngay) {
+    public List<Object[]> getThongKeDoanhThu(Date ThoiGianBatDau, Date ThoiGianKetThuc) {
         List<Object[]> list = new ArrayList<>();
         try {
             ResultSet rs = null;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                String sql = "{call sp_ThongKeTheoNgay (?)}";
-                rs = JDBCHelper.executeQuery(sql, ngay);
+                String sql = "{call sp_ThongKeDoanhThu (?,?)}";
+                rs = JDBCHelper.executeQuery(sql, ThoiGianBatDau, ThoiGianKetThuc);
                 while (rs.next()) {
                     Object[] model = {
-                        rs.getDate("ngaytao"),
-                        rs.getString("MaHD"),
-                        rs.getInt("Gia")
+                        rs.getInt("SoSanPhamBanDuoc"),
+                        rs.getDouble("TienNhapHang"),
+                        rs.getDouble("GiaCaoNhat"),
+                        rs.getDouble("GiaThapNhat"),
+                        rs.getDouble("GiaTrungBinh"),
+                        rs.getDouble("TienBanDuoc"),
+                        rs.getDouble("LoiNhuan")
                     };
                     list.add(model);
                 }
@@ -39,72 +45,26 @@ public class ThongKeDAO {
         return list;
     }
 
-    public List<Object[]> getTheoThang(Date thang) {
+    public List<Object[]> getThongKeSanPham() {
         List<Object[]> list = new ArrayList<>();
         try {
             ResultSet rs = null;
             try {
-                String sql = "{call sp_ThongKeTheoThang (?)}";
-                rs = JDBCHelper.executeQuery(sql, thang);
+                String sql = "{call sp_ThongKeSanPham}";
+                rs = JDBCHelper.executeQuery(sql);
                 while (rs.next()) {
                     Object[] model = {
-                        rs.getString("ngaytao"),
-                        rs.getDate("MaHD"),
-                        rs.getInt("Gia")
-                    };
+                        rs.getString("TenSanPham"),
+                        rs.getInt("SoLuongNhapVao"),
+                        rs.getInt("SoLuongTonKho"),
+                        rs.getInt("SoLuongBanRa"),};
+                    list.add(model);
                 }
             } finally {
                 //     rs.getStatement().getConnection().close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-        return list;
-    }
-
-    public List<Object[]> getTheoSP(int tu, int den) {
-        List<Object[]> list = new ArrayList<>();
-        try {
-            ResultSet rs = null;
-            try {
-                String sql = "{call sp_ThongKeSP (?, ?)}";
-                rs = JDBCHelper.executeQuery(sql, tu, den);
-                while (rs.next()) {
-                    Object[] model = {
-                        rs.getString("MaSP"),
-                        rs.getString("TenSP"),
-                        rs.getInt("SoLuongBanRa"),
-                        rs.getInt("Tong")
-                    };
-                }
-            } finally {
-                //    rs.getStatement().getConnection().close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-        return list;
-    }
-
-    public List<Object[]> getTheoTG(int tu, int den) {
-        List<Object[]> list = new ArrayList<>();
-        try {
-            ResultSet rs = null;
-            try {
-                String sql = "{call sp_ThongKeTheoTG (? ,?)}";
-                rs = JDBCHelper.executeQuery(sql, tu, den);
-                while (rs.next()) {
-                    Object[] model = {
-                        rs.getString("MaHD"),
-                        rs.getDate("Ngay"),
-                        rs.getInt("Gia")
-                    };
-                }
-            } finally {
-                //   rs.getStatement().getConnection().close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException();
         }
         return list;
     }

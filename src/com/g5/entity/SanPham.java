@@ -9,28 +9,28 @@ package com.g5.entity;
  * @author Asus
  */
 public class SanPham {
+
     private int maSP;
     private String tenSP;
-    private boolean trangthai;
+    private int soLuong;
     private int MaNV;
     private String MoTa;
     private String Hinh;
     private String LoaiSP;
-    private float Gia;
-    private float GiaSizeLon;
+    private float giaNguyenLieu;
 
     public SanPham() {
     }
 
-    public SanPham(String tenSP, boolean trangthai, int MaNV, String MoTa, String Hinh, String LoaiSP, float Gia, float GiaSizeLon) {
+    public SanPham(int maSP, String tenSP, int soLuong, int MaNV, String MoTa, String Hinh, String LoaiSP, float giaNguyenLieu) {
+        this.maSP = maSP;
         this.tenSP = tenSP;
-        this.trangthai = trangthai;
+        this.soLuong = soLuong;
         this.MaNV = MaNV;
         this.MoTa = MoTa;
         this.Hinh = Hinh;
         this.LoaiSP = LoaiSP;
-        this.Gia = Gia;
-        this.GiaSizeLon = GiaSizeLon;
+        this.giaNguyenLieu = giaNguyenLieu;
     }
 
     public int getMaSP() {
@@ -49,12 +49,12 @@ public class SanPham {
         this.tenSP = tenSP;
     }
 
-    public boolean isTrangthai() {
-        return trangthai;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setTrangthai(boolean trangthai) {
-        this.trangthai = trangthai;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public int getMaNV() {
@@ -89,22 +89,12 @@ public class SanPham {
         this.LoaiSP = LoaiSP;
     }
 
-    public float getGia() {
-        return Gia;
+    public float getGiaNguyenLieu() {
+        return giaNguyenLieu;
     }
 
-    public void setGia(float Gia) {
-        this.Gia = Gia;
+    public void setGiaNguyenLieu(float giaNguyenLieu) {
+        this.giaNguyenLieu = giaNguyenLieu;
     }
 
-    public float getGiaSizeLon() {
-        return GiaSizeLon;
-    }
-
-    public void setGiaSizeLon(float GiaSizeLon) {
-        this.GiaSizeLon = GiaSizeLon;
-    }
-
-   
-    
 }
