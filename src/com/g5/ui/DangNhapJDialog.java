@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import com.g5.DAO.NhanVienDAOinterface;
+import com.g5.util.TextMes;
 import java.awt.Color;
 import javax.swing.JFrame;
 import org.apache.log4j.PropertyConfigurator;
@@ -240,6 +241,11 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         for (NhanVien nhanVien : list) {
             if (account.equalsIgnoreCase((String.valueOf(nhanVien.getMaNV())))
                     && password.equalsIgnoreCase(nhanVien.getMatkhau())) {
+                if(nhanVien.getTrangthai() == false){
+                    TextMes.alertRed(null, "Tài khoản không còn sử dụng được");
+                Auth.clear();
+                return;
+                }
                 Auth.setLogin(nhanVien);
                 if (!Auth.isLogin()) {
                     return;
