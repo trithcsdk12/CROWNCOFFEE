@@ -94,3 +94,9 @@
 2023-12-02 22:20:26 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng nhập vào hệ thống
 2023-12-02 22:21:17 INFO  MainFrame:212 - Người dùng [Mã nhân viên: 2 | Họ tên: Họ và tên 2] đã đăng xuất
 2023-12-02 22:21:19 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-03 11:40:53 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-03 11:42:30 INFO  NhanVienJPanel:509 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] vừa cập nhật nhân viên :3
+2023-12-03 11:42:38 INFO  NhanVienJPanel:509 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] vừa cập nhật nhân viên :3
+2023-12-03 11:44:29 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-03 11:53:19 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
+2023-12-03 11:55:00 INFO  MainFrame:252 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyen thanh nhan] đã đăng nhập vào hệ thống
