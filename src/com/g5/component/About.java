@@ -11,9 +11,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -22,6 +29,8 @@ import javax.swing.Timer;
 public class About extends javax.swing.JPanel {
 
     private float alpha;
+    private JPopupMenu popupMenu = new JPopupMenu();
+    private JMenuItem menuItem = new JMenuItem();
 
     public void setAlpha(float alpha) {
         this.alpha = alpha;
@@ -33,10 +42,91 @@ public class About extends javax.swing.JPanel {
     public About() {
         initComponents();
         setOpaque(false);
-        setBackground(new Color(65, 152, 216));
-    }
-    
+        setBackground(new Color(59, 188, 208));
+        popupMenu.setOpaque(false);
+        popupMenu.setEnabled(false);
+        popupMenu.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBackground(new Color(99, 126, 118));
+        menuItem.setForeground(Color.WHITE);
+        lblDoiMK.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Đổi mật khẩu");
+                popupMenu.add(menuItem);
+                popupMenu.show(lblDoiMK, e.getX(), e.getY());
 
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
+        lblHDSD.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Hướng dẫn sử dụng");
+                popupMenu.add(menuItem);
+                popupMenu.show(lblHDSD, e.getX(), e.getY());
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
+        lblThongTin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Về chúng tôi");
+                popupMenu.add(menuItem);
+                popupMenu.show(lblThongTin, e.getX(), e.getY());
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
+
+        lblDangXuat.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Đăng xuất");
+                popupMenu.add(menuItem);
+                popupMenu.show(lblDangXuat, e.getX(), e.getY());
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
+    }
+
+    public void addEvenHDSD(MouseAdapter evt) {
+        lblHDSD.addMouseListener(evt);
+    }
+
+    public void addEvenThongTin(MouseAdapter evt) {
+        lblThongTin.addMouseListener(evt);
+    }
+
+    public void addEvenDoiMK(MouseAdapter evt) {
+        lblDoiMK.addMouseListener(evt);
+    }
+
+    public void addEvenDangXuat(MouseAdapter evt) {
+        lblDangXuat.addMouseListener(evt);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,39 +137,44 @@ public class About extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblDoiMK = new javax.swing.JLabel();
+        lblHDSD = new javax.swing.JLabel();
+        lblThongTin = new javax.swing.JLabel();
+        lblDangXuat = new javax.swing.JLabel();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Literature_1.png"))); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(40, 40));
+        lblDoiMK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Password_Reset.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/About.png"))); // NOI18N
+        lblHDSD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Literature.png"))); // NOI18N
+
+        lblThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/About.png"))); // NOI18N
+
+        lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Logout.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jLabel2)
-                    .addContainerGap(183, Short.MAX_VALUE)))
+                .addGap(20, 20, 20)
+                .addComponent(lblHDSD)
+                .addGap(10, 10, 10)
+                .addComponent(lblThongTin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDoiMK)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDangXuat)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jLabel2)
-                    .addContainerGap(126, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDangXuat)
+                    .addComponent(lblThongTin)
+                    .addComponent(lblDoiMK)
+                    .addComponent(lblHDSD))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,7 +187,9 @@ public class About extends javax.swing.JPanel {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblDangXuat;
+    private javax.swing.JLabel lblDoiMK;
+    private javax.swing.JLabel lblHDSD;
+    private javax.swing.JLabel lblThongTin;
     // End of variables declaration//GEN-END:variables
 }

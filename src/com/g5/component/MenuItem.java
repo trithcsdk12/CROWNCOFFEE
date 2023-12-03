@@ -17,7 +17,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -26,9 +29,21 @@ import javax.swing.SwingUtilities;
 public class MenuItem extends javax.swing.JPanel {
 
     private final List<EventMenuSelected> events = new ArrayList<>();
+    private JPopupMenu popupMenu = new JPopupMenu();
+    private JMenuItem menuItem = new JMenuItem();
+    private boolean open = false;
     private int index;
     private boolean selected;
     private boolean mouseOver;
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public int getIndex() {
         return index;
@@ -46,21 +61,65 @@ public class MenuItem extends javax.swing.JPanel {
         this.selected = selected;
     }
 
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
     /**
      * Creates new form Menu
      */
-    public MenuItem(Icon icon, String name, int index) {
+    public MenuItem(Icon icon, String name, int index, String text) {
+        popupMenu.setOpaque(false);
+        popupMenu.setEnabled(false);
+        popupMenu.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBackground(new Color(99, 126, 118));
+        menuItem.setForeground(Color.WHITE);
         initComponents();
         setOpaque(false);
         lblIcon.setText("");
         lblIcon.setIcon(icon);
         lblName.setText(name);
         this.index = index;
-
+//        this.addMouseListener(new MouseAdapter() {
+//            public void mouseEntered(MouseEvent e) {
+//
+//                popupMenu.removeAll();
+//                menuItem.setText(text);
+//                popupMenu.add(menuItem);
+//                if (!isOpen()) {
+//                    popupMenu.show(MenuItem.this, e.getX() + 10, e.getY() - 10);
+//                }
+//
+//            }
+//
+//            public void mouseExited(MouseEvent e) {
+//                popupMenu.removeAll();
+//                popupMenu.setVisible(false);
+//            }
+//        });
+//                item.addMouseListener(new MouseAdapter() {
+//            public void mouseEntered(MouseEvent e) {
+//                popupMenu.removeAll();
+//                menuItem.setText("aa");
+//                popupMenu.add(menuItem);
+//                popupMenu.show(item, e.getX(), e.getY());
+//            }
+//
+//            public void mouseExited(MouseEvent e) {
+//                popupMenu.removeAll();
+//                popupMenu.setVisible(false);
+//            }
+//        });
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 mouseOver = true;
+
             }
 
             @Override

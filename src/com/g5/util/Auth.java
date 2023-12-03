@@ -16,6 +16,14 @@ public class Auth {
     public static void clear() {
         Auth.user = null;
     }
+    
+        /**
+     * Xóa thông tin của người trước và đăng nhập lại
+     */
+    public static void setLogin(NhanVien nv) {
+        Auth.user = null;
+        Auth.user = nv;
+    }
 
     /**
      * Kiểm tra xem đăng nhập hay chưa

@@ -34,7 +34,7 @@ public class Info extends javax.swing.JPanel {
     public Info() {
         initComponents();
         setOpaque(false);
-        setBackground(new Color(65, 152, 216));
+        setBackground(new Color(59, 188, 208));
         setInfo();
     }
 

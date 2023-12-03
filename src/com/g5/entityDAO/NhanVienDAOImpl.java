@@ -20,6 +20,7 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
 
     String selectByID = "select * from NhanVien where MaNV = ?";
     String selectAll = "select * from NhanVien";
+    String selectCbo = "select * from NhanVien where vaitro = ?";
     String insert = "insert into NhanVien (HoTen,MatKhau,SDT,Email,GioiTinh,VaiTro,NgaySinh,DiaChi,TrangThai,Hinh) "
             + "values (?,?,?,?,?,?,?,?,?,?)";
     String update = "Update NhanVien set HoTen=?, MatKhau=?, SDT=?, Email=?, GioiTinh=?, VaiTro=?, NgaySinh=?, DiaChi =?, TrangThai =?, Hinh = ? where MaNV =?";
@@ -65,6 +66,10 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     @Override
     public List<NhanVien> getAll() {
         return select(selectAll);
+    }
+    
+        public List<NhanVien> getAllVaiTro(int vaitro) {
+        return select(selectCbo,vaitro);
     }
 
     @Override

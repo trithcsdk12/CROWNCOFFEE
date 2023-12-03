@@ -20,14 +20,14 @@ import javax.swing.JMenu;
  */
 public class XImage {
 
-    public static ImageIcon imageIcon = new ImageIcon(XImage.class.getResource("/com/g5/image/coffee.png"));
+    public static ImageIcon imageIcon = new ImageIcon(XImage.class.getResource("/com/g5/logos/coffee.png"));
 
     public static Image getAppIcon() {
         return imageIcon.getImage();
     }
-    
-        public static boolean save(File src) {
-        File dst = new File("src/com/g5/logos", src.getName());
+
+    public static boolean save(File src) {
+        File dst = new File("src/com/g5/image", src.getName());
         if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs();
         }
@@ -61,11 +61,11 @@ public class XImage {
         }
     }
 
-    public static void selectImage2(String file, JLabel lbl, int width, int height) {
+    public static void selectLogo(String file, JLabel lbl, int width, int height) {
         try {
             //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));
             lbl.setText("");
-            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/image/" + file.trim()));
+            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/logos/" + file.trim()));
 
             Image image = icon.getImage();
 
@@ -79,15 +79,15 @@ public class XImage {
         }
     }
 
-    public static String urlImage(String picture) {
-        return XImage.class.getResource("/com/g5/image/") + picture.trim();
+    public static String urlLogo(String picture) {
+        return XImage.class.getResource("/com/g5/logos/") + picture.trim();
     }
 
-    public static void chooseImageMenu(String file, JMenu menu) {
+    public static void chooseLogoMenu(String file, JMenu menu) {
         try {
             //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));
 
-            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/image/" + file));
+            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/logos/" + file));
 
             Image image = icon.getImage();
 
@@ -96,53 +96,6 @@ public class XImage {
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
             menu.setIcon(scaledIcon);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void selectImgShowHide(String file, String file2, JLabel lbl) {
-        try {
-            //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));
-            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/image/" + file));
-            ImageIcon icon2 = new ImageIcon(XImage.class.getResource("/com/g5/image/" + file2));
-            Image image = icon.getImage();
-            Image image2 = icon2.getImage();
-            lbl.setText("");
-
-            Image scaledImage = image2.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
-            lbl.setIcon(scaledIcon);
-//            new Thread(new Runnable() {
-//                int width = lbl.getWidth();
-//                int height = lbl.getHeight();
-//                
-//                @Override
-//                public void run() {
-//                    for (int i = width; i > 0; i--) {
-//                        try {
-//                            Thread.sleep(10);
-//                        } catch (Exception e) {
-//                        }
-//                        Image scaledImage = image.getScaledInstance(i, height, Image.SCALE_DEFAULT);
-//                        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-//                        lbl.setIcon(scaledIcon);
-//                    }
-//
-//               //     System.out.println("xong");
-//
-//                    for (int i = 1; i < width; i++) {
-//                        try {
-//                            Thread.sleep(10);
-//                        } catch (Exception e) {
-//                        }
-//                        Image scaledImage = image2.getScaledInstance(i, height, Image.SCALE_DEFAULT);
-//                        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-//                        lbl.setIcon(scaledIcon);
-//                    }
-//                }
-//            }).start();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

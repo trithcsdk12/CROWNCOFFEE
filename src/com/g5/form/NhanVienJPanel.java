@@ -84,11 +84,18 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 fillSearch();
+                                if(cbo.getSelectedIndex() != 0){
+                cbo.setSelectedIndex(0);
+                }
+
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 fillSearch();
+                               if(cbo.getSelectedIndex() != 0){
+                cbo.setSelectedIndex(0);
+                }
             }
 
             @Override
@@ -127,7 +134,29 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     void fillTable() {
-        List<NhanVien> list = nvDAO.getAll();
+       
+        List<NhanVien> list;
+        list  = nvDAO.getAll();
+   
+        
+        
+        if(cbo.getSelectedIndex() == 1){
+            list = null;
+        list  = nvDAO.getAllVaiTro(0);
+        }
+        if(cbo.getSelectedIndex() == 2){
+             list = null;
+        list  = nvDAO.getAllVaiTro(1);
+        }
+        if(cbo.getSelectedIndex() == 3){
+             list = null;
+        list  = nvDAO.getAllVaiTro(2);
+        }
+        
+        
+        
+        
+        
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         int i = 0;
@@ -164,7 +193,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     public void selectImage() {
-        JFileChooser fileChooser = new JFileChooser("src\\com\\g5\\logos");
+        JFileChooser fileChooser = new JFileChooser("src\\com\\g5\\image");
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
 
@@ -337,7 +366,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             BufferedImage originalImage = null;
             boolean loadimg = false;
             try {
-                originalImage = ImageIO.read(new File("src//com//g5//logos//" + nv.getHinh().trim()));
+                originalImage = ImageIO.read(new File("src//com//g5//image//" + nv.getHinh().trim()));
                 loadimg = true;
                 txtHinh.setText(nv.getHinh());
             } catch (Exception e) {
@@ -347,7 +376,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             if (!loadimg) {
                 try {
                     lblHinh.setIcon(null);
-                    originalImage = ImageIO.read(new File("src//com//g5//logos//" + "null.png"));
+                    originalImage = ImageIO.read(new File("src//com//g5//image//" + "null.png"));
                     txtHinh.setText("Lỗi tải ảnh");
                 } catch (Exception e) {
                     //   e.printStackTrace();
@@ -585,6 +614,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         rdoTKma = new javax.swing.JRadioButton();
         rdoTKten = new javax.swing.JRadioButton();
+        cbo = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         lblHinh = new javax.swing.JLabel();
@@ -632,7 +662,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         tblNhanVien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", null},
+                {"0", "1", "2", "3", null, "5", "6", "7", "8", "9", "10", null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null}
@@ -666,10 +696,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             tblNhanVien.getColumnModel().getColumn(2).setPreferredWidth(100);
             tblNhanVien.getColumnModel().getColumn(3).setPreferredWidth(50);
             tblNhanVien.getColumnModel().getColumn(5).setPreferredWidth(200);
-            tblNhanVien.getColumnModel().getColumn(6).setResizable(false);
             tblNhanVien.getColumnModel().getColumn(6).setPreferredWidth(50);
             tblNhanVien.getColumnModel().getColumn(7).setPreferredWidth(50);
-            tblNhanVien.getColumnModel().getColumn(9).setResizable(false);
             tblNhanVien.getColumnModel().getColumn(9).setPreferredWidth(100);
             tblNhanVien.getColumnModel().getColumn(11).setPreferredWidth(50);
         }
@@ -690,6 +718,14 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         rdoTKten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rdoTKten.setText("Theo tên");
 
+        cbo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Nhân viên", "Quản lí", "Chủ" }));
+        cbo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -703,7 +739,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addComponent(rdoTKma)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rdoTKten)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -711,12 +748,17 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rdoTKma)
-                        .addComponent(rdoTKten)))
-                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdoTKma)
+                                .addComponent(rdoTKten)))
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -803,7 +845,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         rdoNu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rdoNu.setText("Nữ");
 
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Broom_2.png"))); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Broom.png"))); // NOI18N
         btnMoi.setPreferredSize(new java.awt.Dimension(50, 50));
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -811,7 +853,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Remove.png"))); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Remove.png"))); // NOI18N
         btnXoa.setPreferredSize(new java.awt.Dimension(50, 50));
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -819,7 +861,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Edit_2.png"))); // NOI18N
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Edit.png"))); // NOI18N
         btnSua.setPreferredSize(new java.awt.Dimension(50, 50));
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -827,7 +869,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Plus.png"))); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Plus.png"))); // NOI18N
         btnThem.setPreferredSize(new java.awt.Dimension(50, 50));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,7 +878,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         });
 
         btnN.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Next.png"))); // NOI18N
+        btnN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Next.png"))); // NOI18N
         btnN.setPreferredSize(new java.awt.Dimension(40, 40));
         btnN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -845,7 +887,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         });
 
         btnL.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Last.png"))); // NOI18N
+        btnL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Last.png"))); // NOI18N
         btnL.setPreferredSize(new java.awt.Dimension(40, 40));
         btnL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -854,7 +896,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         });
 
         btnB.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Back.png"))); // NOI18N
+        btnB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Back.png"))); // NOI18N
         btnB.setPreferredSize(new java.awt.Dimension(40, 40));
         btnB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -863,7 +905,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         });
 
         btnF.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/First.png"))); // NOI18N
+        btnF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/First.png"))); // NOI18N
         btnF.setPreferredSize(new java.awt.Dimension(40, 40));
         btnF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -871,7 +913,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Image.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Image.png"))); // NOI18N
         jButton2.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1177,6 +1219,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         firstTable();
     }//GEN-LAST:event_btnFActionPerformed
 
+    private void cboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboActionPerformed
+        // TODO add your handling code here:
+        fillTable();
+    }//GEN-LAST:event_cboActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnB;
@@ -1191,6 +1238,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JComboBox<String> cbo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

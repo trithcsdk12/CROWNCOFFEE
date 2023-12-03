@@ -19,7 +19,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         initComponents();
          setOpaque(false);
          jLabel1.setText("");
-        XImage.selectImage2("logo.jpg", jLabel1, 900, 850);
+        XImage.selectLogo("logo.jpg", jLabel1, 900, 850);
     }
 
     /**

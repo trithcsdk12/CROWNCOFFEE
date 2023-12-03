@@ -6,8 +6,6 @@
 package com.g5.ui;
 
 import com.g5.component.Menu;
-import com.g5.component.MenuItem;
-import com.g5.component.Setting;
 import com.g5.component.EventMenuSelected;
 import com.g5.form.HoaDonJPanel;
 import com.g5.form.KhuyenMai;
@@ -23,11 +21,10 @@ import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import net.miginfocom.swing.MigLayout;
 import org.apache.log4j.PropertyConfigurator;
 import org.jdesktop.animation.timing.Animator;
@@ -38,7 +35,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
  *
  * @author anhba
  */
-public class MainFrame extends javax.swing.JFrame  {
+public class MainFrame extends javax.swing.JFrame {
 
     public static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(MainFrame.class);
 
@@ -49,6 +46,8 @@ public class MainFrame extends javax.swing.JFrame  {
     private Animator animator;
     private boolean menuShow;
     public static boolean logOut = false;
+    
+        
 
     public MainFrame() {
         this.setUndecorated(true);
@@ -87,9 +86,11 @@ public class MainFrame extends javax.swing.JFrame  {
                     }
                     if (Auth.isLogin()) {
                         if (Auth.user.getVaitro() == 0) {
-                            menu.RemoveMenu(1);
+                            menu.menuRemove2(4);
+                            menu.menuRemove(5);
                         } else {
 
+                            menu.menuFull();
                         }
 
                     }
@@ -105,18 +106,18 @@ public class MainFrame extends javax.swing.JFrame  {
         }).start();
     }
 
-    static void setStatus(boolean bl) {
+    public static void setStatus(boolean bl) {
         if (!bl) {
             logOut = true;
             mainFrame.dispose();
-            Auth.clear();
+         //   Auth.clear();
         }
 
         mainFrame.setVisible(bl);
     }
-    
-    static void exitForm(){
-    System.exit(0);
+
+    static void exitForm() {
+        System.exit(0);
     }
 
     static boolean isOpen() {
@@ -173,8 +174,8 @@ public class MainFrame extends javax.swing.JFrame  {
                     menu.setEnableButtonMenu(false);
                     menu.setEnableButtonMini(false);
                     menu.setEnableButtonExit(false);
-                    menu.setEnableButtonChangePass(false);
-                    menu.setEnableButtonLogOut(false);
+//                    menu.setEnableButtonChangePass(false);
+//                    menu.setEnableButtonLogOut(false);
                     animator.start();
 
                 }
@@ -194,30 +195,30 @@ public class MainFrame extends javax.swing.JFrame  {
             }
         });
 
-        menu.addEventButtonChangePass(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (TextMes.Comform(main, "Bạn có chắc muốn đổi mật khẩu?")) {
-                    setStatus(false);
-                    DoiMatKhauJDialog.setStatus(true);
-                }
-
-            }
-        });
-
-        menu.addEventButtonLogOut(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (TextMes.Comform(main, "Bạn có chắc muốn đăng xuất?")) {
-                    logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " đã đăng xuất");
-
-                    setStatus(false);
-
-                    DangNhapJDialog.setStatus(true);
-                }
-
-            }
-        });
+//        menu.addEventButtonChangePass(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (TextMes.Comform(null, "Bạn có chắc muốn đổi mật khẩu?")) {
+//                    setStatus(false);
+//                    DoiMatKhauJDialog.setStatus(true);
+//                }
+//
+//            }
+//        });
+//
+//        menu.addEventButtonLogOut(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (TextMes.Comform(null, "Bạn có chắc muốn đăng xuất?")) {
+//                    logger.info("Người dùng [Mã nhân viên: " + Auth.user.getMaNV() + " | Họ tên: " + Auth.user.getHoTen() + "]" + " đã đăng xuất");
+//
+//                    setStatus(false);
+//
+//                    DangNhapJDialog.setStatus(true);
+//                }
+//
+//            }
+//        });
 
         menu.setEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -226,24 +227,25 @@ public class MainFrame extends javax.swing.JFrame  {
                     showForm(new TrangChuJPanel());
                 }
                 if (index == 1) {
+                    showForm(new HoaDonJPanel());
+                }
+                if (index == 2) {
+                    showForm(new SanPhamJPanel());
+                }
+                if (index == 3) {
+                    showForm(new KhuyenMai());
+                }
+                if (index == 4) {
+                    showForm(new ThongKeJPanel());
+                }
+                if (index == 5) {
+
                     if (Auth.user.getVaitro() == 0) {
                         showForm(new TrangChuJPanel());
                         TextMes.Alert(null, "Bạn không có quyền truy cập");
                         return;
                     }
                     showForm(new NhanVienJPanel());
-                }
-                if (index == 2) {
-                    showForm(new HoaDonJPanel());
-                }
-                if (index == 3) {
-                    showForm(new SanPhamJPanel());
-                }
-                if (index == 4) {
-                    showForm(new KhuyenMai());
-                }
-                if (index == 5) {
-                    showForm(new ThongKeJPanel());
                 }
             }
         });
@@ -275,8 +277,8 @@ public class MainFrame extends javax.swing.JFrame  {
                     menu.setEnableButtonMenu(true);
                     menu.setEnableButtonMini(true);
                     menu.setEnableButtonExit(true);
-                    menu.setEnableButtonChangePass(true);
-                    menu.setEnableButtonLogOut(true);
+//                    menu.setEnableButtonChangePass(true);
+//                    menu.setEnableButtonLogOut(true);
                     return;
                 }
                 if (menu.getWidth() < 63) {
@@ -284,8 +286,8 @@ public class MainFrame extends javax.swing.JFrame  {
                     menu.setEnableButtonMenu(true);
                     menu.setEnableButtonMini(true);
                     menu.setEnableButtonExit(true);
-                    menu.setEnableButtonChangePass(true);
-                    menu.setEnableButtonLogOut(true);
+//                    menu.setEnableButtonChangePass(true);
+//                    menu.setEnableButtonLogOut(true);
                     return;
                 }
 
@@ -301,13 +303,12 @@ public class MainFrame extends javax.swing.JFrame  {
     }
 
     private void loadFormMenu() {
-        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Home_2.png"))));
-        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Person_1.png"))));
-        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Bill.png"))));
-        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Box.png"))));
-        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Voucher_1.png"))));
-        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(MainFrame.class.getResource("/com/g5/image/Combo_Chart.png"))));
-
+        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Home.png")),"Trang chủ"));
+        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Bill.png")),"Hóa đơn"));
+        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Box.png")),"Sản phẩm"));
+        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Voucher.png")),"Khuyến mãi"));
+        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Combo_Chart.png")),"Thống kê"));
+        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Person.png")),"Nhân viên"));
     }
 
     private void showForm(Component com) {
@@ -344,7 +345,7 @@ public class MainFrame extends javax.swing.JFrame  {
     }
 
     private static boolean openDangNhap() {
-
+       
         DangNhapJDialog.setStatus(true);
         return Auth.isLogin();
     }
@@ -356,6 +357,8 @@ public class MainFrame extends javax.swing.JFrame  {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+
+                new ChaoJDialog(mainFrame, true).setVisible(true);
                 if (openDangNhap()) {
 
                     setStatus(true);
@@ -367,6 +370,5 @@ public class MainFrame extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelBody;
     // End of variables declaration//GEN-END:variables
-
 
 }

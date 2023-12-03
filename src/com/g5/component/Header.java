@@ -43,7 +43,7 @@ public class Header extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Coffee.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Coffee.png"))); // NOI18N
         jLabel1.setText("Coffee shop");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

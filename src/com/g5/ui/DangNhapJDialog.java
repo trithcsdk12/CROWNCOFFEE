@@ -49,7 +49,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
     }
 
-    static void setStatus(boolean bl) {
+    public static void setStatus(boolean bl) {
         dnJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -240,7 +240,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         for (NhanVien nhanVien : list) {
             if (account.equalsIgnoreCase((String.valueOf(nhanVien.getMaNV())))
                     && password.equalsIgnoreCase(nhanVien.getMatkhau())) {
-                Auth.user = nhanVien;
+                Auth.setLogin(nhanVien);
                 if (!Auth.isLogin()) {
                     return;
                 }

@@ -55,7 +55,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
 //        });
     }
 
-    static void setStatus(boolean bl) {
+    public static void setStatus(boolean bl) {
         qmkJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {

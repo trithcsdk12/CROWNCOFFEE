@@ -33,7 +33,7 @@ public class Date extends javax.swing.JPanel {
     public Date() {
         initComponents();
         setOpaque(false);
-        setBackground(new Color(65, 152, 216));
+        setBackground(new Color(59, 188, 208));
     }
     
         public void startClock() {
@@ -59,7 +59,7 @@ public class Date extends javax.swing.JPanel {
         txtDate = new javax.swing.JLabel();
         txtTime = new javax.swing.JLabel();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/image/Clock.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/g5/logos/Clock.png"))); // NOI18N
 
         txtDate.setBackground(new java.awt.Color(255, 255, 255));
         txtDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

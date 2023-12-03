@@ -5,7 +5,10 @@
  */
 package com.g5.component;
 
+import com.g5.ui.DangNhapJDialog;
+import com.g5.ui.DoiMatKhauJDialog;
 import com.g5.ui.MainFrame;
+import com.g5.ui.QuenMatKhauJDialog;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import java.awt.Color;
@@ -14,14 +17,21 @@ import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
@@ -40,9 +50,10 @@ public class Menu extends javax.swing.JPanel {
     private Info bottom;
     private Date date;
     private About about;
-    private JButton cmdLogOut;
-    private JButton cmdChangePass;
-/////////    private Setting setting;
+    private JPopupMenu popupMenu = new JPopupMenu();
+    private JMenuItem menuItem = new JMenuItem();
+    //  private JButton cmdLogOut;
+    //  private JButton cmdChangePass;
     private EventMenuSelected eventMenuSelected;
 
     public void setEventMenuSelected(EventMenuSelected eventMenuSelected) {
@@ -56,20 +67,56 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         init();
+        popupMenu.setOpaque(false);
+        popupMenu.setEnabled(false);
+        popupMenu.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBorder(new EmptyBorder(1, 1, 1, 1));
+        menuItem.setBackground(new Color(99, 126, 118));
+        menuItem.setForeground(Color.WHITE);
+
+        about.addEvenHDSD(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                TextMes.Alert(null, "Hướng dẫn sử dụng");
+            }
+        });
+        about.addEvenThongTin(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                TextMes.Alert(null, "Về chúng tôi");
+            }
+        });
+        about.addEvenDoiMK(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (TextMes.Comform(null, "Bạn có chắc muốn đổi mật khẩu?")) {
+                    MainFrame.setStatus(false);
+                    DoiMatKhauJDialog.setStatus(true);
+                };
+            }
+        });
+        about.addEvenDangXuat(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (TextMes.Comform(null, "Bạn có chắc muốn đăng xuất?")) {
+                    MainFrame.setStatus(false);
+                    DangNhapJDialog.setStatus(true);
+                };
+            }
+        });
     }
 
+
+    
     void init() {
         setLayout(new MigLayout("wrap, fillx, insets 0", "5[fill]0", "5[]0[]5"));// wrap: xuống dòng mỗi khi thêm, fillx: full độ dài, insets 0: không khoảng cách
         panelMenu = new JPanel();                                                              // [fill]: khoảng cách ngang, [][]: khoảng cách dọc
         header = new Header();
         bottom = new Info();
         date = new Date();
+
         //////     setting = new Setting();
         createButtonMenu();
-        createButtonLogout();
+        createButtonExit();
         createButtonMini();
-        createButtonChangePass();
-        createButtonLogOut();
+        //    createButtonChangePass();
+        //   createButtonLogOut();
         panelMenu.setOpaque(false);
         layout = new MigLayout("fillx, wrap", "0[fill]5", "0[]0[]5"); // component | []: Khoang cac ngang | [][]: Khoang cach doc
         panelMenu.setLayout(layout);
@@ -77,8 +124,8 @@ public class Menu extends javax.swing.JPanel {
         add(cmdMenu, "pos 1al 0al 100% , height 50!");
         add(cmdMini, "pos 1al 770 100% , height 50!");
         add(cmdExit, "pos 1al 1al 100% , height 50!");
-        add(cmdLogOut, "pos -170 1al 100% , height 50!");
-        add(cmdChangePass, "pos -170 770 100% , height 50!");
+        //   add(cmdLogOut, "pos -170 1al 100% , height 50!");
+        //  add(cmdChangePass, "pos -170 770 100% , height 50!");
         //   add(cmdMini, "pos 1al 1al 100% 50, height 50!"); // pos trái phải rộng 
         //  add(cmdMini,"pos 1al 1al 50% , height 50!");
         add(header);
@@ -94,7 +141,8 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void addMenu(Model_Menu menu) {
-        MenuItem item = new MenuItem(menu.getIcon(), menu.getMenuName(), panelMenu.getComponentCount());
+        MenuItem item = new MenuItem(menu.getIcon(), menu.getMenuName(), panelMenu.getComponentCount(), menu.getText());
+
         item.addEvent(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -110,6 +158,9 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         item.addEvent(eventMenuSelected);
+        item.addMouseListener(new MouseAdapter() {
+
+        });
         panelMenu.add(item);
         if (item.getIndex() == 0) {
             item.setSelected(true);
@@ -133,32 +184,21 @@ public class Menu extends javax.swing.JPanel {
 
         }
         repaint();
-
     }
 
-    public Component MenuItemNhanVien() {
-        for (Component com : panelMenu.getComponents()) {
-            try {
-                MenuItem item = (MenuItem) com;
-                if (item.getIndex() == 1) {
-                    return item;
-                }
+    public MenuItem itemMenuNhanVien = null;
+    public MenuItem itemMenuThongKe = null;
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        return null;
-    }
-
-    public void RemoveMenu(int index) {
+    public void menuRemove(int index) {
         for (Component com : panelMenu.getComponents()) {
             try {
                 MenuItem item = (MenuItem) com;
                 if (item.getIndex() == index) {
-                    item.setVisible(false);
-                 //   panelMenu.remove(com);
+                    itemMenuNhanVien = item;
+                    panelMenu.remove(com);
+                    //  panelMenu.add(item, 5);
+                    //   item.setVisible(false);
+                    //   panelMenu.remove(com);
                     break;
                 }
 
@@ -171,12 +211,65 @@ public class Menu extends javax.swing.JPanel {
 
     }
 
+    public void menuRemove2(int index) {
+        for (Component com : panelMenu.getComponents()) {
+            try {
+                MenuItem item = (MenuItem) com;
+                if (item.getIndex() == index) {
+                    itemMenuThongKe = item;
+                    panelMenu.remove(com);
+
+                    break;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        repaint();
+
+    }
+
+    public void menuFull() {
+
+        try {
+            if (itemMenuNhanVien != null && itemMenuThongKe != null) {
+                panelMenu.add(itemMenuThongKe);
+                panelMenu.add(itemMenuNhanVien);
+                itemMenuThongKe = null;
+                itemMenuNhanVien = null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        repaint();
+
+    }
+
     public void createButtonMenu() {
         cmdMenu = new JButton();
         cmdMenu.setContentAreaFilled(false); //  không cho phép vẽ nền của button
         cmdMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdMenu.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/image/Menu_1.png")));
+        cmdMenu.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/logos/Menu.png")));
         cmdMenu.setBorder(new EmptyBorder(0, 1, 0, 16));
+
+        cmdMenu.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Menu");
+                popupMenu.add(menuItem);
+                popupMenu.show(cmdMenu, e.getX() + 10, e.getY() - 10);
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
     }
 
     public void setEnableButtonMenu(boolean bl) {
@@ -191,46 +284,72 @@ public class Menu extends javax.swing.JPanel {
         cmdExit.setEnabled(bl);
     }
 
-    public void setEnableButtonChangePass(boolean bl) {
-        cmdChangePass.setEnabled(bl);
-    }
-
-    public void setEnableButtonLogOut(boolean bl) {
-        cmdLogOut.setEnabled(bl);
-    }
-
-    public void createButtonLogout() {
+//    public void setEnableButtonChangePass(boolean bl) {
+//    //    cmdChangePass.setEnabled(bl);
+//    }
+//
+//    public void setEnableButtonLogOut(boolean bl) {
+//   //     cmdLogOut.setEnabled(bl);
+//    }
+    public void createButtonExit() {
         cmdExit = new JButton();
         cmdExit.setContentAreaFilled(false);
         cmdExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdExit.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/image/Cancel_1.png")));
+        cmdExit.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/logos/Cancel.png")));
         cmdExit.setBorder(new EmptyBorder(0, 1, 0, 11)); // vị trí của Button exit
+        cmdExit.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Thoát");
+                popupMenu.add(menuItem);
+                popupMenu.show(cmdExit, e.getX() + 10, e.getY() - 10);
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
     }
 
     public void createButtonMini() {
         cmdMini = new JButton();
         cmdMini.setContentAreaFilled(false);
         cmdMini.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdMini.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/image/Minimize_3.png")));
+        cmdMini.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/logos/Minimize.png")));
         cmdMini.setBorder(new EmptyBorder(0, 1, 0, 11));
+        cmdMini.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                popupMenu.removeAll();
+                menuItem.setText("Thu nhỏ");
+                popupMenu.add(menuItem);
+                popupMenu.show(cmdMini, e.getX() + 10, e.getY() - 10);
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                popupMenu.removeAll();
+                popupMenu.setVisible(false);
+            }
+        });
     }
 
-    public void createButtonChangePass() {
-        cmdChangePass = new JButton();
-        cmdChangePass.setContentAreaFilled(false);
-        cmdChangePass.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdChangePass.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/image/Password_Reset.png")));
-        cmdChangePass.setBorder(new EmptyBorder(0, 1, 0, 11));
-    }
-
-    public void createButtonLogOut() {
-        cmdLogOut = new JButton();
-        cmdLogOut.setContentAreaFilled(false);
-        cmdLogOut.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdLogOut.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/image/Logout_2.png")));
-        cmdLogOut.setBorder(new EmptyBorder(0, 1, 0, 11));
-    }
-
+//    public void createButtonChangePass() {
+//        cmdChangePass = new JButton();
+//        cmdChangePass.setContentAreaFilled(false);
+//        cmdChangePass.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        cmdChangePass.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/logos/Password_Reset.png")));
+//        cmdChangePass.setBorder(new EmptyBorder(0, 1, 0, 11));
+//    }
+//
+//    public void createButtonLogOut() {
+//        cmdLogOut = new JButton();
+//        cmdLogOut.setContentAreaFilled(false);
+//        cmdLogOut.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        cmdLogOut.setIcon(new ImageIcon(Menu.class.getResource("/com/g5/logos/Logout.png")));
+//        cmdLogOut.setBorder(new EmptyBorder(0, 1, 0, 11));
+//    }
     public void addEventButtonMenu(ActionListener evt) {
         cmdMenu.addActionListener(evt);
     }
@@ -243,14 +362,13 @@ public class Menu extends javax.swing.JPanel {
         cmdMini.addActionListener(evt);
     }
 
-    public void addEventButtonChangePass(ActionListener evt) {
-        cmdChangePass.addActionListener(evt);
-    }
-
-    public void addEventButtonLogOut(ActionListener evt) {
-        cmdLogOut.addActionListener(evt);
-    }
-
+//    public void addEventButtonChangePass(ActionListener evt) {
+//        cmdChangePass.addActionListener(evt);
+//    }
+//
+//    public void addEventButtonLogOut(ActionListener evt) {
+//        cmdLogOut.addActionListener(evt);
+//    }
 //    private int x;
 //    private int y;
 //
@@ -340,7 +458,7 @@ public class Menu extends javax.swing.JPanel {
         header.setAlpha(alpha);
         bottom.setAlpha(alpha);
         date.setAlpha(alpha);
-        /////      setting.setAlpha(alpha);
+
         about.setAlpha(alpha);
     }
 

@@ -30,7 +30,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         loadTK();
     }
 
-    static void setStatus(boolean bl) {
+    public static void setStatus(boolean bl) {
         dmkJDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
