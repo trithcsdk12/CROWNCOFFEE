@@ -32,7 +32,19 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String Size = "select size from GiaSanPham where MaSP = ?";
     String resetIdentity = "DBCC CHECKIDENT (SanPham,RESEED,?)";
     String tensp = "Select tensp from sanpham where masp = ?";
+    String upSoLuong = "update SanPham set SoLuongSP = ? where maSP = ?";
 
+    
+    public void upSoluong(SanPham sp){
+        try {
+            JDBCHelper.executeUpdate(upSoLuong, 
+                    sp.getSoLuong(),
+                    sp.getMaSP()
+            );
+        } catch (Exception e) {
+        }
+        
+    }
     public float getGiaByMaSPAndSize(int maSP, String size) {
         float gia = -1.0f;
         try {

@@ -32,12 +32,15 @@ public class HoaDonDAO implements HoaDonDAOinterface {
         List<HoaDon> list = select(selectByID, id);
         return list.size() > 0 ? list.get(0) : null;
     }
-
+        
+    public List<HoaDon> getByIDHD(Integer id){
+        return select(selectByID, id);
+    }
     public String getLast() {
         List<HoaDon> list = select(last);
         return list.size() > 0 ? String.valueOf(list.get(0).getMaHD() + 1).trim() : "Lỗi truy vấn";
     }
-
+    
     @Override
     public List<HoaDon> getAll() {
         return select(selectAll);
