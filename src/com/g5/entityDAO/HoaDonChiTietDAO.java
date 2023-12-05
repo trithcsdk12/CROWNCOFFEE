@@ -106,7 +106,7 @@ public class HoaDonChiTietDAO {
 
     private HoaDonChiTiet readFromResultSet(ResultSet rs) throws SQLException {
         HoaDonChiTiet model = new HoaDonChiTiet();
-//        model.setMaHD(rs.getInt("MaHD"));
+        model.setMaHD(rs.getInt("MaHD"));
         model.setMaSP(rs.getInt("MaSP"));
         model.setSoluong(rs.getInt("SoLuong"));
         model.setGia(rs.getFloat("Gia"));

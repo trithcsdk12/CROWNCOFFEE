@@ -15,6 +15,7 @@ public class HoaDon {
     private Date NgayTao;
     private int maNV;
     private float TienKhachTra;
+    private float TongTien;
     private String GhiChu;
     private boolean trangthai;
 
@@ -29,6 +30,14 @@ public class HoaDon {
         this.trangthai = trangthai;
     }
 
+    public float getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(float TongTien) {
+        this.TongTien = TongTien;
+    }
+    
     public int getMaHD() {
         return maHD;
     }

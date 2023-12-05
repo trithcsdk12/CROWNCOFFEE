@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.g5.DAO.HoaDonDAOinterface;
+import jdk.jshell.spi.ExecutionControl;
 
 /**
  *
@@ -23,7 +24,7 @@ public class HoaDonDAO implements HoaDonDAOinterface {
     String selectAll = "select * from HoaDon";
     String insert = "insert into HoaDon (NgayTao,MaNV,TienKhach,GhiChu,TrangThai) "
             + "values (?,?,?,?,?)";
-    String update = "Update HoaDon set NgayTao=?,MaNV=?, TienKhach=?, GhiChu=?, TrangThai=? where MaHD =?";
+    String update = "Update HoaDon set NgayTao=?,MaNV=?, TienKhach=?,TongTien =?, GhiChu=?, TrangThai=? where MaHD =?";
     String delete = "Delete from HoaDon where MaHD = ?";
     String last = "SELECT * FROM HoaDon ORDER BY MaHD DESC";
 
@@ -32,19 +33,21 @@ public class HoaDonDAO implements HoaDonDAOinterface {
         List<HoaDon> list = select(selectByID, id);
         return list.size() > 0 ? list.get(0) : null;
     }
-        
-    public List<HoaDon> getByIDHD(Integer id){
+
+    public List<HoaDon> getByIDHD(Integer id) {
         return select(selectByID, id);
     }
+
     public String getLast() {
         List<HoaDon> list = select(last);
         return list.size() > 0 ? String.valueOf(list.get(0).getMaHD() + 1).trim() : "Lỗi truy vấn";
     }
-    
+
     @Override
     public List<HoaDon> getAll() {
         return select(selectAll);
     }
+ 
 
     @Override
     public Integer create(HoaDon hd) {
@@ -70,6 +73,7 @@ public class HoaDonDAO implements HoaDonDAOinterface {
                 hd.getNgayTao(),
                 hd.getMaNV(),
                 hd.getTienKhachTra(),
+                hd.getTongTien(),
                 hd.getGhiChu(),
                 hd.isTrangthai(),
                 hd.getMaHD());
@@ -91,7 +95,7 @@ public class HoaDonDAO implements HoaDonDAOinterface {
                     list.add(model);
                 }
             } finally {
-            
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -99,6 +103,38 @@ public class HoaDonDAO implements HoaDonDAOinterface {
         }
         return list;
     }
+    public List<Object[]> getLichSuHDDaThanhToan() {
+    List<Object[]> list = new ArrayList<>();
+    try {
+        ResultSet rs = null;
+        try {
+            // Chỉ lấy những hóa đơn đã thanh toán
+            String query = "SELECT * FROM HoaDon WHERE TrangThai = 1";
+            rs = JDBCHelper.executeQuery(query);
+
+            while (rs.next()) {
+                Object[] model = {
+                    rs.getInt("MaHD"),
+                    rs.getDate("NgayTao"),
+                    rs.getInt("MaNV"),
+                    rs.getFloat("TienKhach"),
+                    rs.getFloat("TongTien"),
+                    rs.getBoolean("TrangThai"),
+                    rs.getString("GhiChu")
+                };
+                list.add(model);
+            }
+        } finally {
+            if (rs != null) {
+                rs.getStatement().getConnection().close();
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+    }
+    return list;
+}
 
     private HoaDon readFromResultSet(ResultSet rs) throws SQLException {
         HoaDon model = new HoaDon();
@@ -106,6 +142,7 @@ public class HoaDonDAO implements HoaDonDAOinterface {
         model.setNgayTao(rs.getDate("NgayTao"));
         model.setMaNV(rs.getInt("MaNV"));
         model.setTienKhachTra(rs.getFloat("TienKhach"));
+        model.setTongTien(rs.getFloat("TongTien"));
         model.setGhiChu(rs.getString("GhiChu"));
         model.setTrangthai(rs.getBoolean("TrangThai"));
         return model;
