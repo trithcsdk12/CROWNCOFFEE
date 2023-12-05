@@ -194,23 +194,9 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         }
     }
 
-//    private void SuKienBieuDo() {
-//        DefaultCatego dataset = new DefaultCategoryDataset();
-//
-//        // Lấy dữ liệu từ bảng JTable
-//        int rowCount = tblDoanhThu.getRowCount();
-//        for (int i = 0; i < rowCount; i++) {
-//            String productName = tblDoanhThu.getValueAt(i, 0).toString();
-//            int quantity = Integer.parseInt(tblDoanhThu.getValueAt(i, 1).toString());
-//            dataset.addValue(quantity, "Số lượng", productName);
-//        }
-//
-//        // Tạo biểu đồ cột
-//        JFreeChart chart = ChartFactory.createBarChart("Biểu đồ Số lượng sản phẩm", "Tên sản phẩm", "Số lượng", dataset, PlotOrientation.VERTICAL, false, true, false);
-//
-//        // Hiển thị biểu đồ
-//        ChartFrame frame = new ChartFrame("Biểu đồ", chart);
-//    }
+    public static void main(String[] args) {
+        new ThongKeJPanel().setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,6 +216,8 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         tblDoanhThu = new javax.swing.JTable();
         dcrDen = new com.toedter.calendar.JDateChooser();
         jLabel15 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         lblTongNam = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -282,13 +270,32 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("Đến");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(718, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(252, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -310,7 +317,10 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                         .addComponent(dcrDen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -327,7 +337,9 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                     .addComponent(dcrTu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tabs.addTab("Doanh Thu", jPanel3);
@@ -454,10 +466,12 @@ public class ThongKeJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dcrDen;
     private com.toedter.calendar.JDateChooser dcrTu;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

@@ -47,7 +47,6 @@ public class XacNhanMatKhauJDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnHoanThanh = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
@@ -61,10 +60,6 @@ public class XacNhanMatKhauJDiaLog extends javax.swing.JDialog {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(378, 370));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel2.setText("Xác nhân mật khẩu");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Xác nhận mật khẩu mới");
@@ -115,7 +110,6 @@ public class XacNhanMatKhauJDiaLog extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(txtTaiKhoan)
-                    .addComponent(jLabel2)
                     .addComponent(txtMK)
                     .addComponent(txtXNMK))
                 .addContainerGap(87, Short.MAX_VALUE))
@@ -123,9 +117,7 @@ public class XacNhanMatKhauJDiaLog extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(83, 83, 83)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +219,6 @@ public class XacNhanMatKhauJDiaLog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHoanThanh;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

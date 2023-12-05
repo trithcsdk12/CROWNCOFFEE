@@ -8,7 +8,6 @@ package com.g5.ui;
 import com.g5.component.Menu;
 import com.g5.component.EventMenuSelected;
 import com.g5.form.HoaDonJPanel;
-import com.g5.form.KhuyenMai;
 import com.g5.form.NhanVienJPanel;
 import com.g5.form.SanPhamJPanel;
 import com.g5.form.ThongKeJPanel;
@@ -134,7 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelBody.setLayout(panelBodyLayout);
         panelBodyLayout.setHorizontalGroup(
             panelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGap(0, 276, Short.MAX_VALUE)
         );
         panelBodyLayout.setVerticalGroup(
             panelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
                     showForm(new SanPhamJPanel());
                 }
                 if (index == 3) {
-                    showForm(new KhuyenMai());
+                //    showForm(new KhuyenMai());
                 }
                 if (index == 4) {
                     showForm(new ThongKeJPanel());

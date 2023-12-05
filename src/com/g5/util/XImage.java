@@ -20,7 +20,7 @@ import javax.swing.JMenu;
  */
 public class XImage {
 
-    public static ImageIcon imageIcon = new ImageIcon(XImage.class.getResource("/com/g5/logos/coffee.png"));
+    public static ImageIcon imageIcon = new ImageIcon(XImage.class.getResource("/com/g5/logos/icon.png"));
 
     public static Image getAppIcon() {
         return imageIcon.getImage();
