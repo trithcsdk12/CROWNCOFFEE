@@ -10,6 +10,7 @@ import com.g5.entityDAO.NhanVienDAOImpl;
 import com.g5.ui.MainFrame;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
+import com.g5.util.Validate;
 import com.g5.util.XDate;
 import com.g5.util.XImage;
 import java.awt.Color;
@@ -30,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -188,8 +190,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     void fillForm() {
+        nvDAO.resetIdentity(nvDAO.getMaxMaNV());
         txtMaNV.setText(String.valueOf(nvDAO.getMaxMaNV() + 1));
-
+        
     }
 
     public void selectImage() {
@@ -284,6 +287,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     void insertNV() {
+        List<JTextField> textFieldList = List.of(txtMaNV, txtEmail, txtHoTen, txtMatKhau, txtSDT, txtXNMatKhau);
+        
+        if(!Validate.kiemTraTrongText(textFieldList, null)){
+        return;
+        }
         NhanVien nv = getForm();
         if (nv.getVaitro() == 2) {
             TextMes.Alert(this, "Bạn không đủ quyền đề làm điều này");
@@ -293,6 +301,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         return;
         }
         nvDAO.create(nv);
+        nvDAO.resetIdentity(nvDAO.getMaxMaNV());
         fillTable();
         fillForm();
         clear(new NhanVien());
@@ -318,6 +327,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         txtNgaySinh.setDate(nv.getNgaysinh() == null ? new Date() : new Date());
         txtSDT.setText(nv.getSDT());
         txtMatKhau.setText("");
+        txtXNMatKhau.setText("");
 
         if (vaitroTK == 1) {
             rdoNV.setEnabled(true);
@@ -506,6 +516,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         }
 
         nvDAO.deteleByID(Integer.parseInt(txtMaNV.getText().trim()));
+        nvDAO.resetIdentity(nvDAO.getMaxMaNV());
         fillTable();
         fillForm();
         clear(new NhanVien());

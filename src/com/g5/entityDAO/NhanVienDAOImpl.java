@@ -28,12 +28,17 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     String selectLast = "select max(MaNV) as Max from nhanvien";
     String searchMaNV = "select * from nhanvien where MaNV like ?";
     String searchName = "select * from nhanvien where Hoten like ?";
+    String resetIdentity = "DBCC CHECKIDENT (NhanVien,RESEED,?)";
 //    create or alter proc MaxMaNV
 //as
 //begin
 //SELECT MAX(Manv) as Max
 //FROM NhanVien
 //end
+
+    public void resetIdentity(int colum) {
+        JDBCHelper.executeUpdate(resetIdentity, colum);
+    }
 
     @Override
     public NhanVien getByID(Integer maNV) {
@@ -67,9 +72,9 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
     public List<NhanVien> getAll() {
         return select(selectAll);
     }
-    
-        public List<NhanVien> getAllVaiTro(int vaitro) {
-        return select(selectCbo,vaitro);
+
+    public List<NhanVien> getAllVaiTro(int vaitro) {
+        return select(selectCbo, vaitro);
     }
 
     @Override
@@ -163,7 +168,7 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
                 rdpass.trim(),
                 manv
         );
-        
+
     }
 
 }
