@@ -46,8 +46,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Animator animator;
     private boolean menuShow;
     public static boolean logOut = false;
-    
-        
 
     public MainFrame() {
         this.setUndecorated(true);
@@ -110,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (!bl) {
             logOut = true;
             mainFrame.dispose();
-         //   Auth.clear();
+            //   Auth.clear();
         }
 
         mainFrame.setVisible(bl);
@@ -219,7 +217,6 @@ public class MainFrame extends javax.swing.JFrame {
 //
 //            }
 //        });
-
         menu.setEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -303,12 +300,12 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void loadFormMenu() {
-        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Home.png")),"Trang chủ"));
-        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Bill.png")),"Hóa đơn"));
-        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Box.png")),"Sản phẩm"));
-        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Voucher.png")),"Khuyến mãi"));
-        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Combo_Chart.png")),"Thống kê"));
-        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Person.png")),"Nhân viên"));
+        menu.addMenu(new Model_Menu("Trang chủ", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Home.png")), "Trang chủ"));
+        menu.addMenu(new Model_Menu("Hóa đơn", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Bill.png")), "Hóa đơn"));
+        menu.addMenu(new Model_Menu("Sản phẩm", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Box.png")), "Sản phẩm"));
+        menu.addMenu(new Model_Menu("Khuyến mãi", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Voucher.png")), "Khuyến mãi"));
+        menu.addMenu(new Model_Menu("Thống kê", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Combo_Chart.png")), "Thống kê"));
+        menu.addMenu(new Model_Menu("Nhân viên", new ImageIcon(MainFrame.class.getResource("/com/g5/logos/Person.png")), "Nhân viên"));
     }
 
     private void showForm(Component com) {
@@ -345,7 +342,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private static boolean openDangNhap() {
-       
+
         DangNhapJDialog.setStatus(true);
         return Auth.isLogin();
     }

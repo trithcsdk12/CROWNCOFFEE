@@ -25,13 +25,13 @@ public class ThongKeDAO {
                 rs = JDBCHelper.executeQuery(sql, ThoiGianBatDau, ThoiGianKetThuc);
                 while (rs.next()) {
                     Object[] model = {
-                        rs.getInt("SoSanPhamBanDuoc"),
-                        rs.getDouble("TienNhapHang"),
-                        rs.getDouble("GiaCaoNhat"),
-                        rs.getDouble("GiaThapNhat"),
-                        rs.getDouble("GiaTrungBinh"),
-                        rs.getDouble("TienBanDuoc"),
-                        rs.getDouble("LoiNhuan")
+                        rs.getInt("soluong"),
+                        rs.getDouble("tienhaphang"),
+                        rs.getDouble("tiecaonhat"),
+                        rs.getDouble("tienthapnhat"),
+                        rs.getDouble("tientb"),
+                        rs.getDouble("loinhuan"),
+                        rs.getDouble("tongtien")
                     };
                     list.add(model);
                 }

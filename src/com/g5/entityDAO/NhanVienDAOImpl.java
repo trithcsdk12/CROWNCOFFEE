@@ -25,7 +25,7 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
             + "values (?,?,?,?,?,?,?,?,?,?)";
     String update = "Update NhanVien set HoTen=?, MatKhau=?, SDT=?, Email=?, GioiTinh=?, VaiTro=?, NgaySinh=?, DiaChi =?, TrangThai =?, Hinh = ? where MaNV =?";
     String delete = "Delete from NhanVien where MaNV = ?";
-    String selectLast = "{call MaxMaNV()}";
+    String selectLast = "select max(MaNV) as Max from nhanvien";
     String searchMaNV = "select * from nhanvien where MaNV like ?";
     String searchName = "select * from nhanvien where Hoten like ?";
 //    create or alter proc MaxMaNV
