@@ -62,8 +62,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
 
-        tblNhanVien.getTableHeader().setFont(new Font("Tohama", 1, 16));
-        tblNhanVien.setRowMargin(1);
+   
+     
         btnThem.setEnabled(false);
         btnXoa.setEnabled(false);
         btnSua.setEnabled(false);
@@ -72,6 +72,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         fillTable();
         fillForm();
         init();
+        tblNhanVien.getTableHeader().setFont(new Font("Tohoma", Font.BOLD, 18));
+        tblNhanVien.setOpaque(false);
+        tblNhanVien.getTableHeader().setBackground(new Color(32,136,203));
+        tblNhanVien.getTableHeader().setForeground(new Color(255,255,255));
         PropertyConfigurator.configure("src/com/g5/log/log4j.properties");
 
 //        JViewport viewport = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, tblNhanVien);
@@ -119,7 +123,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         int i = 0;
         for (NhanVien nhanVien : list) {
-            String vaitro = "Có lỗi xảy ra";
+            String vaitro = "Lỗi";
             if (nhanVien.getVaitro() == 0) {
                 vaitro = "Nhân viên";
             }
@@ -163,7 +167,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         int i = 0;
         for (NhanVien nhanVien : list) {
-            String vaitro = "Có lỗi xảy ra";
+            String vaitro = "Lỗi";
             if (nhanVien.getVaitro() == 0) {
                 vaitro = "Nhân viên";
             }

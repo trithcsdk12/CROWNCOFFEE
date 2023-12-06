@@ -13,6 +13,7 @@ import com.g5.form.SanPhamJPanel;
 import com.g5.form.ThongKeJPanel;
 import com.g5.form.TrangChuJPanel;
 import com.g5.component.Model_Menu;
+import com.g5.form.KhuyenMaiJpanel;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import java.awt.BorderLayout;
@@ -229,7 +230,7 @@ public class MainFrame extends javax.swing.JFrame {
                     showForm(new SanPhamJPanel());
                 }
                 if (index == 3) {
-                //    showForm(new KhuyenMai());
+                    showForm(new KhuyenMaiJpanel());
                 }
                 if (index == 4) {
                     showForm(new ThongKeJPanel());
