@@ -93,7 +93,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         center.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, center);
         table.getTableHeader().setBackground(Color.red);
-        table.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, 14));
+        table.getTableHeader().setFont(new Font("Tohoma", Font.BOLD, 14));
         table.setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(new Color(255, 255, 255));
