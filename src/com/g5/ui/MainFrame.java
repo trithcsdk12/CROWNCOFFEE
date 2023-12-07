@@ -13,7 +13,6 @@ import com.g5.form.SanPhamJPanel;
 import com.g5.form.ThongKeJPanel;
 import com.g5.form.TrangChuJPanel;
 import com.g5.component.Model_Menu;
-import com.g5.form.KhuyenMaiJpanel;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import java.awt.BorderLayout;
@@ -169,9 +168,9 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!animator.isRunning()) {
-                    menu.setEnableButtonMenu(false);
-                    menu.setEnableButtonMini(false);
-                    menu.setEnableButtonExit(false);
+//                    menu.setEnableButtonMenu(false);
+//                    menu.setEnableButtonMini(false);
+//                    menu.setEnableButtonExit(false);
 //                    menu.setEnableButtonChangePass(false);
 //                    menu.setEnableButtonLogOut(false);
                     animator.start();
@@ -184,7 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-        });
+        }); 
         menu.addEventButtonMini(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -230,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
                     showForm(new SanPhamJPanel());
                 }
                 if (index == 3) {
-                    showForm(new KhuyenMaiJpanel());
+              //      showForm(new KhuyenMaiJpanel());
                 }
                 if (index == 4) {
                     showForm(new ThongKeJPanel());
@@ -271,18 +270,18 @@ public class MainFrame extends javax.swing.JFrame {
             public void end() {
                 if (menu.getWidth() > 63) {
                     menuShow = true;
-                    menu.setEnableButtonMenu(true);
-                    menu.setEnableButtonMini(true);
-                    menu.setEnableButtonExit(true);
+//                    menu.setEnableButtonMenu(true);
+//                    menu.setEnableButtonMini(true);
+//                    menu.setEnableButtonExit(true);
 //                    menu.setEnableButtonChangePass(true);
 //                    menu.setEnableButtonLogOut(true);
                     return;
                 }
                 if (menu.getWidth() < 63) {
                     menuShow = false;
-                    menu.setEnableButtonMenu(true);
-                    menu.setEnableButtonMini(true);
-                    menu.setEnableButtonExit(true);
+//                    menu.setEnableButtonMenu(true);
+//                    menu.setEnableButtonMini(true);
+//                    menu.setEnableButtonExit(true);
 //                    menu.setEnableButtonChangePass(true);
 //                    menu.setEnableButtonLogOut(true);
                     return;

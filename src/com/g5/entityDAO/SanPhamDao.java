@@ -22,9 +22,9 @@ public class SanPhamDao implements SanPhamDAOinterface {
 
     String selectByID = "select * from SanPham where MaSP = ?";
     String selectAll = "select * from SanPham";
-    String insert = "insert into SanPham (TenSP,SoLuong,MaNV,MoTa,Hinh,LoaiSP,GiaNguyenLieu) "
+    String insert = "insert into SanPham (TenSP,SoLuongSP,MaNV,MoTa,Hinh,LoaiSP,GiaNhap) "
             + "values (?,?,?,?,?,?,?)";
-    String update = "Update SanPham set TenSP=?, SoLuong=?, MaNV=?, MoTa=?, Hinh=?, LoaiSP=?, GiaNguyenLieu = ? where MaSP =?";
+    String update = "Update SanPham set TenSP=?, SoLuongSP=?, MaNV=?, MoTa=?, Hinh=?, LoaiSP=?, GiaNhap = ? where MaSP =?";
     String delete = "Delete from SanPham where MaSP = ?";
     String TenSP = "Select TenSP from SanPham where LoaiSP = ?";
     String MaSP = "Select MaSP from SanPham where TenSP = ?";
@@ -33,20 +33,54 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String resetIdentity = "DBCC CHECKIDENT (SanPham,RESEED,?)";
     String tensp = "Select tensp from sanpham where masp = ?";
     String upSoLuong = "update SanPham set SoLuongSP = ? where maSP = ?";
-
+    String selectLast = "select max(MaSP) as Max from SanPham";
+    String selectLastNV = "select max(MaNV) as Max from nhanvien";
+    String SelectSize = "select size  from giasanpham where masp = ?";
+    String SelectSizeCombobox = "select size as size from giasanpham where masp = ?";
     
-    public void upSoluong(SanPham sp){
+
+    public List<String> getSize2(Integer maSP) {
+        List<String> list = select2(SelectSize, maSP);
+        return list != null ? list : null;
+    }
+
+    public int getMaxMaNV() {
+        ResultSet rs = null;
         try {
-            JDBCHelper.executeUpdate(upSoLuong, 
+            rs = JDBCHelper.executeQuery(selectLastNV);
+            rs.next();
+            return rs.getInt("Max");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getMaxMaSP() {
+        ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(selectLast);
+            rs.next();
+            return rs.getInt("Max");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void upSoluong(SanPham sp) {
+        try {
+            JDBCHelper.executeUpdate(upSoLuong,
                     sp.getSoLuong(),
                     sp.getMaSP()
             );
         } catch (Exception e) {
         }
-        
+
     }
+
     public float getGiaByMaSPAndSize(int maSP, String size) {
-        float gia = -1.0f;
+        float gia = 0.0f;
         try {
             ResultSet rs = JDBCHelper.executeQuery("SELECT Gia FROM GiaSanPham WHERE MaSP = ? AND Size = ?", maSP, size);
             if (rs.next()) {
@@ -135,6 +169,8 @@ public class SanPhamDao implements SanPhamDAOinterface {
 
     @Override
     public void deteleByID(Integer id) {
+        String deleteCT = "Delete from GiaSanPham where MaSP = ?";
+        JDBCHelper.executeUpdate(deleteCT, id);
         JDBCHelper.executeUpdate(delete, id);
     }
 
@@ -172,6 +208,30 @@ public class SanPhamDao implements SanPhamDAOinterface {
         model.setLoaiSP(rs.getString("LoaiSP"));
         model.setGiaNguyenLieu(rs.getFloat("GiaNhap"));
         return model;
+    }
+    
+    private List<String> select2(String sql, Object... args) {
+        List<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = JDBCHelper.executeQuery(sql, args);
+                while (rs.next()) {
+                    String model = readFromResultSet2(rs);
+                    list.add(model);
+                }
+            } finally {
+                // rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
+    private String readFromResultSet2(ResultSet rs) throws SQLException {
+        
+        return rs.getString("Size");
     }
 
 }

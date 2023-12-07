@@ -64,6 +64,21 @@ public class Validate {
         return true;
     }
 
+    public static boolean kiemTraMa(String input) {
+        if (input.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean kiemTraSo(String soluong) {
+        if (soluong.isEmpty()) {
+            return false;
+        }
+        return true;
+
+    }
+
     public static boolean kiemTraTrongText(List<JTextField> text, List<JPasswordField> pass) {
         //// Đầu tiên tạo List<JTextField> textFieldList = List.of(textField1, textField2, textField3);
         //// List.of(textField1, textField2, textField3); -> trong ngoặc (textfield số 1 , textfiled số 2, ....)

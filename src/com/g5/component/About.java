@@ -55,7 +55,7 @@ public class About extends javax.swing.JPanel {
                 popupMenu.removeAll();
                 menuItem.setText("Đổi mật khẩu");
                 popupMenu.add(menuItem);
-                popupMenu.show(lblDoiMK, e.getX(), e.getY());
+                popupMenu.show(lblDoiMK, e.getX() +10, e.getY() -10);
 
             }
 
@@ -70,7 +70,7 @@ public class About extends javax.swing.JPanel {
                 popupMenu.removeAll();
                 menuItem.setText("Hướng dẫn sử dụng");
                 popupMenu.add(menuItem);
-                popupMenu.show(lblHDSD, e.getX(), e.getY());
+                popupMenu.show(lblHDSD, e.getX() +10, e.getY() -10);
 
             }
 
@@ -85,7 +85,7 @@ public class About extends javax.swing.JPanel {
                 popupMenu.removeAll();
                 menuItem.setText("Về chúng tôi");
                 popupMenu.add(menuItem);
-                popupMenu.show(lblThongTin, e.getX(), e.getY());
+                popupMenu.show(lblThongTin, e.getX() +10, e.getY() -10);
 
             }
 
@@ -101,7 +101,7 @@ public class About extends javax.swing.JPanel {
                 popupMenu.removeAll();
                 menuItem.setText("Đăng xuất");
                 popupMenu.add(menuItem);
-                popupMenu.show(lblDangXuat, e.getX(), e.getY());
+                popupMenu.show(lblDangXuat, e.getX() +10, e.getY() -10);
 
             }
 

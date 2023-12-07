@@ -76,7 +76,7 @@ public class HoaDon {
         return GhiChu;
     }
 
-    public void setGhiChu(String DiaChi) {
+    public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
 
