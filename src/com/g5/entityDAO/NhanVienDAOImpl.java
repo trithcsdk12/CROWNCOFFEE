@@ -36,6 +36,10 @@ public class NhanVienDAOImpl implements NhanVienDAOinterface {
 //FROM NhanVien
 //end
 
+    public List<NhanVien> getByIDNV(Integer id) {
+        return select(selectByID, id);
+    }
+
     public void resetIdentity(int colum) {
         JDBCHelper.executeUpdate(resetIdentity, colum);
     }

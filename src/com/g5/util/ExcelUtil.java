@@ -41,8 +41,7 @@ public class ExcelUtil {
         createCell(row, 3, "Ngày Tạo", style);
         createCell(row, 4, "Mã nhân viên", style);
         createCell(row, 5, "Tổng tiền", style);
-        createCell(row, 6, "Tiền khách trả", style);
-        createCell(row, 7, "Ghi chú", style);
+        createCell(row, 6, "Ghi chú", style);
 
         // Data
         for (int i = 0; i < list.size(); i++) {
@@ -56,7 +55,6 @@ public class ExcelUtil {
             createCell(row, 4, getStringValue(tblBangDiem, i, 4), null);
             createCell(row, 5, getStringValue(tblBangDiem, i, 5), null);
             createCell(row, 6, getStringValue(tblBangDiem, i, 6), null);
-            createCell(row, 7, getStringValue(tblBangDiem, i, 7), null);
         }
         return workbook;
     }
@@ -79,7 +77,7 @@ public class ExcelUtil {
 
     private static String getStringValue(JTable table, int row, int column) {
         Object value = table.getValueAt(row, column);
-   //     System.out.println(row);
+//   //     System.out.println(row);
 //        System.out.println(value);
         return value != null ? value.toString() : "";
     }
