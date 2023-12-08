@@ -95,6 +95,15 @@ public class XDate {
         return strDate;
     }
 
+    public static String ChuyenNgay2(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        if (date == null) {
+            return formatter.format(XDate.now());
+        }
+        String strDate = formatter.format(date);
+        return strDate;
+    }
+
     public static Date now() {
 
         return new Date();

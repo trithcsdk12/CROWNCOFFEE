@@ -57,18 +57,29 @@ public class JDBCHelper {
         return con;
     }
 
-//    public static void closeConnection() {
-//        try {
-//            connection.close();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    public static void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static Properties loadDbProperties() {
         try {
             Properties props = new Properties();
             props.load(JDBCHelper.class.getResource("Jdbc.properties").openStream());
+            return props;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+        public static Properties loadTTProperties() {
+        try {
+            Properties props = new Properties();
+            props.load(JDBCHelper.class.getResource("ThongTin.properties").openStream());
             return props;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -118,7 +129,7 @@ public class JDBCHelper {
             try {
                 stmt.executeUpdate();
             } finally {
-                stmt.getConnection().close();
+                closeConnection();
             }
         } catch (SQLException e) {
             e.printStackTrace();

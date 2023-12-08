@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import com.g5.DAO.NhanVienDAOinterface;
 import com.g5.util.TextMes;
+import com.g5.util.Validate;
 import java.awt.Color;
 import javax.swing.JFrame;
 import org.apache.log4j.PropertyConfigurator;
@@ -263,6 +264,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     void Login() {
         String account = txtMaNV1.getText().trim();
         String password = txtPass.getText().trim();
+   
         List<NhanVien> list = dao.getAll();
 
         boolean found = false;

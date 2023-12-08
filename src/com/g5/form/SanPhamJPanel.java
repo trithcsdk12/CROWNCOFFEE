@@ -29,6 +29,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -59,6 +61,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         //   first();
         fillTableSPCT();
         fillForm();
+        init();
         //    firstCT();
         tblSanPham.getTableHeader().setFont(new Font("Tohoma", 1, 16));
         tblChiTiet.getTableHeader().setFont(new Font("Tohoma", 1, 16));
@@ -67,6 +70,27 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         btnSua1.setEnabled(false);
         btnXoa1.setEnabled(false);
         btnThem1.setEnabled(false);
+    }
+
+    void init() {
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                fillSearch();
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                fillSearch();
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                //  timKiem();  //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
     }
 
     void fillForm() {
@@ -85,8 +109,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             List<SanPham> list = dao.getAll();
+            int i = 0;
             for (SanPham sp : list) {
                 Object row[] = {
+                    ++i,
                     sp.getMaSP(),
                     sp.getTenSP(),
                     sp.getSoLuong(),
@@ -146,7 +172,14 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             return;
         }
         model.setRowCount(0);
-        String tenSP = (String) tblSanPham.getValueAt(this.row, 1);
+        String tenSP = "";
+        try {
+            tenSP = (String) tblSanPham.getValueAt(this.row, 2);
+        } catch (Exception e) {
+            return;
+        }
+        
+        
         try {
             List<GiaSP> list = daoCT.selectByID(Integer.parseInt(txtMaSP.getText()));
             int i = 0;
@@ -311,6 +344,38 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         }
     }
 
+    void fillSearch() {
+        List<SanPham> list;
+        if (rdoTKma.isSelected()) {
+            list = dao.selectByKeyword(txtTimKiem.getText().trim());
+        } else {
+            list = dao.selectByName(txtTimKiem.getText().trim());
+        }
+
+        if (list.size() <= 0) {
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+        int i = 0;
+        for (SanPham sp : list) {
+            Object row[] = {
+                ++i,
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getSoLuong(),
+                sp.getMaNV(),
+                sp.getMoTa(),
+                sp.getHinh(),
+                sp.getLoaiSP(),
+                sp.getGiaNguyenLieu()
+            };
+            model.addRow(row);
+
+        }
+    }
+
     void updateStatusSP() {
         boolean edit = (this.row >= 0);
 //        boolean first = (this.row == 0);
@@ -412,7 +477,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             txtSize.setSelectedIndex(0);
             txtGia1.setText("" + dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
         }
-        
+
         fillTableSPCT();
 
     }
@@ -732,17 +797,17 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         tblSanPham.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Số lượng", "Mã NV", "Mô tả", "Hình", "Loại SP", "Giá nhập"
+                "STT", "Mã SP", "Tên SP", "Số lượng", "Mã NV", "Mô tả", "Hình", "Loại SP", "Giá nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -763,10 +828,11 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         jScrollPane10.setViewportView(tblSanPham);
         if (tblSanPham.getColumnModel().getColumnCount() > 0) {
             tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(150);
             tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblSanPham.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -888,6 +954,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             }
         });
 
+        cboLoaiSP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cboLoaiSP.setPreferredSize(new java.awt.Dimension(29, 30));
         cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1118,7 +1185,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                                 .addComponent(lblGiaNL)
                                 .addComponent(txtGiaNL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblMoTa)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1209,6 +1276,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        txtSize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSizeActionPerformed(evt);

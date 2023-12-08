@@ -22,7 +22,7 @@ public class HoaDonChiTietDAO {
     String selectALL = "select * from HoaDonChiTiet";
     String insert = "insert into HoaDonChiTiet (MaHD, MaSP, SoLuong, Gia, Size, PTKhuyenMai) "
             + "values (?,?,?,?,?,?)";
-    String update = "Update HoaDonChiTiet set MaHD=?, MaSP=?, SoLuong=?, Gia=?, Size=?,PTKhuyenMai=? where MaSP =?";
+    String update = "Update HoaDonChiTiet set MaHD=?, MaSP=?, SoLuong=?, Gia=?, Size=?, PTKhuyenMai=? where MaSP =?";
     String selectByIDHD = "select * from HoaDonChiTiet where MaSP = ?";
     String delete = "Delete from HoaDonChiTiet where MaSP = ?";
 

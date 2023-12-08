@@ -37,7 +37,18 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String selectLastNV = "select max(MaNV) as Max from nhanvien";
     String SelectSize = "select size  from giasanpham where masp = ?";
     String SelectSizeCombobox = "select size as size from giasanpham where masp = ?";
-    
+    String searchMaSP = "select * from sanpham where masp like ?";
+    String searchName = "select * from sanpham where tensp like ?";
+
+    public List<SanPham> selectByKeyword(String keyword) {
+
+        return select(searchMaSP, "%" + keyword + "%");
+    }
+
+    public List<SanPham> selectByName(String keyword) {
+
+        return select(searchName, "%" + keyword + "%");
+    }
 
     public List<String> getSize2(Integer maSP) {
         List<String> list = select2(SelectSize, maSP);
@@ -209,7 +220,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
         model.setGiaNguyenLieu(rs.getFloat("GiaNhap"));
         return model;
     }
-    
+
     private List<String> select2(String sql, Object... args) {
         List<String> list = new ArrayList<>();
         try {
@@ -230,7 +241,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
     }
 
     private String readFromResultSet2(ResultSet rs) throws SQLException {
-        
+
         return rs.getString("Size");
     }
 
