@@ -39,6 +39,30 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String SelectSizeCombobox = "select size as size from giasanpham where masp = ?";
     String searchMaSP = "select * from sanpham where masp like ?";
     String searchName = "select * from sanpham where tensp like ?";
+    String upSoluongbitrung = "update hoadonchitiet set soluong = ? where masp = ? and size = ?";
+    String selectSoluongSP = "select soluong from hoadonchitiet where masp = ? and size = ?";
+
+    public int getSL(int masp, String size) {
+        ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(selectSoluongSP, masp, size.trim());
+            rs.next();
+            return rs.getInt("soluong");
+        } catch (Exception e) {
+            //    e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void upSoluongBiTrung(int soluong, int masp, String size) {
+        int sl = 0;
+        sl = getSL(masp, size) + soluong;
+        try {
+            JDBCHelper.executeUpdate(upSoluongbitrung, sl, masp, size.trim());
+        } catch (Exception e) {
+        }
+
+    }
 
     public List<SanPham> selectByKeyword(String keyword) {
 

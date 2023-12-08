@@ -1194,7 +1194,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
-      
+
         clearHDCT();
     }//GEN-LAST:event_btnNewActionPerformed
 
@@ -1595,7 +1595,9 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     }
 
     void insertHDCT(HoaDonChiTiet hdct) {
-
+        SanPhamDao spdao = new SanPhamDao();
+        HoaDonChiTietDAO hdctDao = new HoaDonChiTietDAO();
+        HoaDon hoadon = hdDao.getByID(Integer.parseInt(txtMAHD.getText().trim()));
         try {
             if (txtMAHD.getText().trim().isEmpty()) {
                 return;
@@ -1603,9 +1605,21 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             if (txtSoLuong.getText().trim().isEmpty()) {
                 return;
             }
-            HoaDon hoadon = hdDao.getByID(Integer.parseInt(txtMAHD.getText().trim()));
+            
+            
+            try {
+                if (hdctDao.getSPbiTrung(hdct.getMaSP(), hdct.getSize()) == 1) {
+                    spdao.upSoluongBiTrung(hdct.getSoluong(), hdct.getMaSP(), hdct.getSize().trim());
+                    FillTableHoaDonChiTet(hoadon.getMaHD());
+                    JOptionPane.showMessageDialog(null, "Cập nhật chi tiết hóa đơn thành công");
+                    return;
+                }
+            } catch (Exception e) {
+                return;
+            }
+
             if (hoadon != null && !hoadon.isTrangthai()) {
-                SanPhamDao spdao = new SanPhamDao();
+
                 int soluong = Integer.parseInt(txtSoLuong.getText().trim());
                 int soluongsp = Integer.parseInt(lblSoLuongSP.getText().trim());
                 List<SanPham> ls = spdao.getAll();
@@ -1686,9 +1700,9 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         SanPhamDao spdao = new SanPhamDao();
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenSP.getModel();
         DefaultComboBoxModel modelLoai = (DefaultComboBoxModel) cboLoai.getModel();
-        if(clickHDCT == true){
-        model.removeAllElements();
-        clickHDCT = false;
+        if (clickHDCT == true) {
+            model.removeAllElements();
+            clickHDCT = false;
         }
         List<SanPham> ls = spdao.getAll();
         for (SanPham sp : ls) {
@@ -1716,7 +1730,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     void cboLoai() {
         DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cboLoai.getModel();
         model.removeAllElements();
-        
+
         try {
             SanPhamDao spdao = new SanPhamDao();
             List<SanPham> list = spdao.getAll();
@@ -1844,10 +1858,15 @@ public class HoaDonJPanel extends javax.swing.JPanel {
 
     void Sale(int MaSP) {
         KhuyenMaiDAO kmdao = new KhuyenMaiDAO();
-        if (kmdao.getSPINKM(MaSP) == 0) {
-            txtKhuyenMai.setText("Không có");
+        try {
+            if (kmdao.getSPINKM(MaSP) == 0) {
+                txtKhuyenMai.setText("Không có");
+                return;
+            }
+        } catch (Exception e) {
             return;
         }
+
         sale = kmdao.getKhuyenMai(MaSP);
 
         if (sale != -1.0f) {
@@ -1943,18 +1962,17 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         txtKhuyenMai.setText("");
         txtThanhTien.setText("");
         lblSoLuongSP.setText("");
-        
-            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cboLoai.getModel();
-         //   model.removeAllElements();
-            model.setSelectedItem("Chọn loại");
-            DefaultComboBoxModel<String> modelTen = (DefaultComboBoxModel<String>) cboTenSP.getModel();
-         //   modelTen.removeAllElements();
-            modelTen.setSelectedItem("Chưa chọn");
-            DefaultComboBoxModel<String> modelSize = (DefaultComboBoxModel<String>) cboSizeSP.getModel();
+
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cboLoai.getModel();
+        //   model.removeAllElements();
+        model.setSelectedItem("Chọn loại");
+        DefaultComboBoxModel<String> modelTen = (DefaultComboBoxModel<String>) cboTenSP.getModel();
+        //   modelTen.removeAllElements();
+        modelTen.setSelectedItem("Chưa chọn");
+        DefaultComboBoxModel<String> modelSize = (DefaultComboBoxModel<String>) cboSizeSP.getModel();
         //   modelSize.removeAllElements();
-            modelSize.setSelectedItem("Chọn size");
-          cboLoai();
-        
+        modelSize.setSelectedItem("Chọn size");
+        cboLoai();
 
         setStatusHDCT(true);
     }

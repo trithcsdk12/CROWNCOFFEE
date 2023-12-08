@@ -35,7 +35,7 @@ public class KhuyenMaiDAO implements KhuyenMaiDAOinterface {
             rs.next();
             return rs.getInt("TimThay");
         } catch (Exception e) {
-            e.printStackTrace();
+          //  e.printStackTrace();
         }
         return 0;
     }
