@@ -39,7 +39,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String SelectSizeCombobox = "select size as size from giasanpham where masp = ?";
     String searchMaSP = "select * from sanpham where masp like ?";
     String searchName = "select * from sanpham where tensp like ?";
-    String upSoluongbitrung = "update hoadonchitiet set soluong = ? where masp = ? and size = ?";
+    String upSoluongbitrung = "update hoadonchitiet set soluong = ? where mahd = ? and masp = ? and size = ?";
     String selectSoluongSP = "select soluong from hoadonchitiet where masp = ? and size = ?";
 
     public int getSL(int masp, String size) {
@@ -54,11 +54,11 @@ public class SanPhamDao implements SanPhamDAOinterface {
         return 0;
     }
 
-    public void upSoluongBiTrung(int soluong, int masp, String size) {
+    public void upSoluongBiTrung(int soluong,int mahd, int masp, String size) {
         int sl = 0;
         sl = getSL(masp, size) + soluong;
         try {
-            JDBCHelper.executeUpdate(upSoluongbitrung, sl, masp, size.trim());
+            JDBCHelper.executeUpdate(upSoluongbitrung, sl, mahd,masp, size.trim());
         } catch (Exception e) {
         }
 

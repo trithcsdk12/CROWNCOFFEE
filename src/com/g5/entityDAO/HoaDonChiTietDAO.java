@@ -25,16 +25,16 @@ public class HoaDonChiTietDAO {
     String update = "Update HoaDonChiTiet set MaHD=?, MaSP=?, SoLuong=?, Gia=?, Size=?, PTKhuyenMai=? where MaSP =?";
     String selectByIDHD = "select * from HoaDonChiTiet where MaSP = ?";
     String delete = "Delete from HoaDonChiTiet where MaSP = ?";
-    String spTrung = "SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS TimThay FROM HoaDonChiTiet hdct WHERE hdct.MaSP = ? AND hdct.Size = ?";
+    String spTrung = "SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS TimThay FROM HoaDonChiTiet hdct WHERE hdct.mahd = ? and hdct.MaSP = ? AND hdct.Size = ?";
 
-    public int getSPbiTrung(int masp, String size) {
+    public int getSPbiTrung(int mahd, int masp, String size) {
         ResultSet rs = null;
         try {
-            rs = JDBCHelper.executeQuery(spTrung, masp, size.trim());
+            rs = JDBCHelper.executeQuery(spTrung, mahd, masp, size.trim());
             rs.next();
             return rs.getInt("TimThay");
         } catch (Exception e) {
-        //    e.printStackTrace();
+            e.printStackTrace();
         }
         return 0;
     }

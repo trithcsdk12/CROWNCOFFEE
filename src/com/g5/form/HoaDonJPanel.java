@@ -93,6 +93,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         setFontTable(tblHoaDon);
         setFontTable(tblHoaDonChiTiet);
         setFontTable(tblLichSuHD);
+        btnInsert.setEnabled(false);
     }
 
     void setFontTable(JTable table) {
@@ -1608,14 +1609,15 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             
             
             try {
-                if (hdctDao.getSPbiTrung(hdct.getMaSP(), hdct.getSize()) == 1) {
-                    spdao.upSoluongBiTrung(hdct.getSoluong(), hdct.getMaSP(), hdct.getSize().trim());
+                if (hdctDao.getSPbiTrung(hdct.getMaHD(),hdct.getMaSP(), hdct.getSize()) == 1) {
+                    spdao.upSoluongBiTrung(hdct.getSoluong(),hdct.getMaHD(), hdct.getMaSP(), hdct.getSize().trim());
                     FillTableHoaDonChiTet(hoadon.getMaHD());
                     JOptionPane.showMessageDialog(null, "Cập nhật chi tiết hóa đơn thành công");
+                    btnInsert.setEnabled(false);
                     return;
                 }
             } catch (Exception e) {
-                return;
+             //  e.printStackTrace();
             }
 
             if (hoadon != null && !hoadon.isTrangthai()) {
@@ -1975,6 +1977,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         cboLoai();
 
         setStatusHDCT(true);
+        btnInsert.setEnabled(true);
     }
 
     void updateHoaDon() {
