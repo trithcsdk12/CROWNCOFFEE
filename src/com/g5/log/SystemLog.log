@@ -746,3 +746,12 @@
 2023-12-08 16:17:17 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
 2023-12-08 16:19:40 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
 2023-12-08 16:21:31 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
+2023-12-08 17:52:55 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
+2023-12-08 17:55:11 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
+2023-12-08 18:02:35 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] đã đăng nhập vào hệ thống
+2023-12-08 18:03:55 INFO  NhanVienJPanel:539 - Người dùng [Mã nhân viên: 1 | Họ tên: Nguyễn Thành Nhân] vừa xóa nhân viên :7
+2023-12-08 18:04:20 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 2 | Họ tên: Trần Vũ Giang] đã đăng nhập vào hệ thống
+2023-12-08 18:04:30 INFO  NhanVienJPanel:567 - Người dùng [Mã nhân viên: 2 | Họ tên: Trần Vũ Giang] vừa cập nhật nhân viên :4
+2023-12-08 18:04:49 INFO  NhanVienJPanel:567 - Người dùng [Mã nhân viên: 2 | Họ tên: Trần Vũ Giang] vừa cập nhật nhân viên :3
+2023-12-08 18:10:25 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 2 | Họ tên: Trần Vũ Giang] đã đăng nhập vào hệ thống
+2023-12-08 18:15:46 INFO  MainFrame:289 - Người dùng [Mã nhân viên: 2 | Họ tên: Trần Vũ Giang] đã đăng nhập vào hệ thống

@@ -83,6 +83,10 @@ public class XImage {
         return XImage.class.getResource("/com/g5/logos/") + picture.trim();
     }
 
+    public static String urlImage(String picture) {
+        return XImage.class.getResource("/com/g5/image/") + picture.trim();
+    }
+
     public static void chooseLogoMenu(String file, JMenu menu) {
         try {
             //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));

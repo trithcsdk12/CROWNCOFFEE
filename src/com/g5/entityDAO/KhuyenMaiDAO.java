@@ -27,15 +27,30 @@ public class KhuyenMaiDAO implements KhuyenMaiDAOinterface {
     String delete = "Delete from KhuyenMai where MaKM = ?";
     String khuyenmai = "SELECT KM.PTKhuyenMai FROM KhuyenMaiChiTiet KMCT JOIN KhuyenMai KM ON KMCT.MaKM = KM.MaKM WHERE KMCT.MaSP = ?;";
     String timKM = "SELECT CASE WHEN GETDATE() BETWEEN km.ThoiGianBD AND km.ThoiGianKT THEN 1 ELSE 0 END AS TimThay FROM KhuyenMai km JOIN KhuyenMaiChiTiet kmct ON km.MaKM = kmct.MaKM WHERE kmct.MaSP = ?";
+    String ptKMcuaSP = "select sum(km.PTKhuyenMai) as ptkm from KhuyenMaiChiTiet kmct join KhuyenMai km on kmct.MaKM = km.MaKM where kmct.MaSP = ? and GETDATE() BETWEEN km.ThoiGianBD AND km.ThoiGianKT";
+
+    public float getPTKMcuaSP(int masp) {
+        float ptkm = 0;
+        ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(ptKMcuaSP, masp);
+            rs.next();
+            ptkm = rs.getFloat("ptkm");
+            return ptkm;
+        } catch (Exception e) {
+            //  e.printStackTrace();
+        }
+        return 0;
+    }
 
     public int getSPINKM(int masp) {
         ResultSet rs = null;
         try {
-            rs = JDBCHelper.executeQuery(timKM,masp);
+            rs = JDBCHelper.executeQuery(timKM, masp);
             rs.next();
             return rs.getInt("TimThay");
         } catch (Exception e) {
-          //  e.printStackTrace();
+            //  e.printStackTrace();
         }
         return 0;
     }

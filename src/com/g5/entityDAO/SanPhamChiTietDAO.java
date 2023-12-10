@@ -35,8 +35,23 @@ public class SanPhamChiTietDAO {
     String slGiaSP = "SELECT COUNT(*) AS count FROM GiaSanPham WHERE masp = ?";
     String kiemtratensp = "SELECT case when exists  ( select * FROM SanPham WHERE tensp = ? ) then 1 else 0 end as soluong";
     String selectMaxMaGSP = "select max(MaGSP) as Max from Giasanpham";
+    String getGiaSP = "select top 1 gsp.Gia  from GiaSanPham gsp where gsp.MaSP = ?";
 
     SanPhamDao spDAO = new SanPhamDao();
+
+    public float getGiaSP(int masp) {
+        float gia = 0;
+        ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(getGiaSP, masp);
+            rs.next();
+            gia = rs.getInt("Gia");
+            return gia;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public int getMaxGiaSP() {
         ResultSet rs = null;

@@ -40,7 +40,22 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String searchMaSP = "select * from sanpham where masp like ?";
     String searchName = "select * from sanpham where tensp like ?";
     String upSoluongbitrung = "update hoadonchitiet set soluong = ? where mahd = ? and masp = ? and size = ?";
-    String selectSoluongSP = "select soluong from hoadonchitiet where masp = ? and size = ?";
+    String selectSoluongSP = "select soluongsp from sanpham where masp = ?";
+    String getSoLuongSP = "select SanPham.SoLuongSP from SanPham where masp = ?";
+
+    public int getSoLuongSP(int masp) {
+        ResultSet rs = null;
+        int sl = 0;
+        try {
+            rs = JDBCHelper.executeQuery(selectSoluongSP, masp);
+            rs.next();
+            sl = rs.getInt("SoLuongSP");
+            return sl;
+        } catch (Exception e) {
+            //    e.printStackTrace();
+        }
+        return 0;
+    }
 
     public int getSL(int masp, String size) {
         ResultSet rs = null;
@@ -54,11 +69,11 @@ public class SanPhamDao implements SanPhamDAOinterface {
         return 0;
     }
 
-    public void upSoluongBiTrung(int soluong,int mahd, int masp, String size) {
+    public void upSoluongBiTrung(int soluong, int mahd, int masp, String size) {
         int sl = 0;
         sl = getSL(masp, size) + soluong;
         try {
-            JDBCHelper.executeUpdate(upSoluongbitrung, sl, mahd,masp, size.trim());
+            JDBCHelper.executeUpdate(upSoluongbitrung, sl, mahd, masp, size.trim());
         } catch (Exception e) {
         }
 
