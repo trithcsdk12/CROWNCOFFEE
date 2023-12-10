@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
@@ -34,21 +35,79 @@ public class ItemSanPham extends javax.swing.JPanel {
     JPanel overlayPanel = new JPanel();
     public boolean selected = false;
     public String maspChon = "0";
-
+    public float gia = 0;
+    public float giagiam =0;
+    public String loaisp = "";
     public int masp = 0;
     public String thongtin = "";
     public String tensp = "Tên SP";
+    public String soluongMua = "0";
+    public String sizeMua = "0";
+    public String tongtienMua = "0";
 
     public void setThongTin(String tensp, String tt) {
         this.tensp = tensp;
         this.thongtin = tensp + tt;
-        
+        //     System.out.println(XImage.urlImage("sp1.png"));
+        //      txtAnh.setIcon(new ImageIcon(XImage.urlImage("sp1.png")));
+        //     txtAnh.repaint();
         txtThongTin.removeAll();
         txtThongTin.setText("");
         txtThongTin.setText(thongtin);
 
     }
 
+    public String getSoluongMua() {
+        return soluongMua;
+    }
+
+    public void setSoluongMua(String soluongMua) {
+        this.soluongMua = soluongMua;
+    }
+
+    public String getSizeMua() {
+        return sizeMua;
+    }
+
+    public void setSizeMua(String sizeMua) {
+        this.sizeMua = sizeMua;
+    }
+
+    public String getTongtienMua() {
+        return tongtienMua;
+    }
+
+    public void setTongtienMua(String tongtienMua) {
+        this.tongtienMua = tongtienMua;
+    }
+
+    
+    
+    public String getLoaisp() {
+        return loaisp;
+    }
+
+    public void setLoaisp(String loaisp) {
+        this.loaisp = loaisp;
+    }
+
+    public float getGia() {
+        return gia;
+    }
+
+    public void setGia(float gia) {
+        this.gia = gia;
+    }
+
+    public float getGiagiam() {
+        return giagiam;
+    }
+
+    public void setGiagiam(float giagiam) {
+        this.giagiam = giagiam;
+    }
+    
+    
 
     public String getTenSP() {
         return this.tensp;
@@ -74,10 +133,49 @@ public class ItemSanPham extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
+     *
      */
-    public ItemSanPham() {
+    private static ImageIcon createResizedIcon(ImageIcon icon, int width, int height) {
+        Image image = icon.getImage();
+        Image resizedImage = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+    }
+    
+     public ItemSanPham() {
+     
+     }
+
+    public ItemSanPham(ImageIcon icon) {
         initComponents();
         //   setOpaque(false);
+        txtAnh.setText("");
+        try {
+            if (icon != null) {
+                //  icon = createResizedIcon(new ImageIcon("path/to/your/image.png"), 100, 100);
+                Image image = icon.getImage();
+
+                Image scaledImage = image.getScaledInstance(w, h, Image.SCALE_DEFAULT);
+
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                txtAnh.setIcon(scaledIcon);
+            } else {
+                icon = new ImageIcon(ItemSanPham.class.getResource("/com/g5/image/nullSanPham.png"));
+                Image image = icon.getImage();
+
+                Image scaledImage = image.getScaledInstance(w, h, Image.SCALE_DEFAULT);
+
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                txtAnh.setIcon(scaledIcon);
+           
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        if(icon != null){
+//        txtAnh.setIcon(icon);
+//        
+//        }
         txtThongTin.setLineWrap(true);
         txtThongTin.setWrapStyleWord(true);
         //  setOpaque(false);
@@ -163,7 +261,6 @@ public class ItemSanPham extends javax.swing.JPanel {
                     selected = false;
                 }
 
-            
                 ManChinh.loadCacSP();
             }
         });
@@ -178,7 +275,6 @@ public class ItemSanPham extends javax.swing.JPanel {
                     selected = false;
                 }
 
-            
                 ManChinh.loadCacSP();
             }
         });
@@ -192,7 +288,6 @@ public class ItemSanPham extends javax.swing.JPanel {
                     selected = false;
                 }
 
-           
                 ManChinh.loadCacSP();
             }
         });

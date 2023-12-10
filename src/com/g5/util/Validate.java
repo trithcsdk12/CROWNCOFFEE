@@ -5,9 +5,11 @@
  */
 package com.g5.util;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JPasswordField;
@@ -38,6 +40,35 @@ public class Validate {
         }
         // Kiểm tra tuổi có lớn hơn 16 hay không
         return true;
+    }
+
+    public static String chuyenGiaVietNam(float gia) {
+        // Tạo một đối tượng NumberFormat với Locale là Vietnam
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+        // Định dạng số thành chuỗi
+        String formattedNumber = currencyFormat.format(gia);
+        return formattedNumber;
+    }
+
+    public static String chuyenGiaMacDinh(String gia) {
+        int intValue = 0;
+        // Tạo một đối tượng NumberFormat với Locale là Vietnam
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        try {
+            Number parsedNumber = currencyFormat.parse(gia.trim());
+
+            // Chuyển đối số Number thành số nguyên
+            intValue = parsedNumber.intValue();
+            
+            return String.valueOf(intValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Định dạng số thành chuỗi
+        
+        return String.valueOf(intValue);
     }
 
     public static boolean kiemTraEmail(String email) {

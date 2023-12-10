@@ -36,9 +36,34 @@ public class SanPhamChiTietDAO {
     String kiemtratensp = "SELECT case when exists  ( select * FROM SanPham WHERE tensp = ? ) then 1 else 0 end as soluong";
     String selectMaxMaGSP = "select max(MaGSP) as Max from Giasanpham";
     String getGiaSP = "select top 1 gsp.Gia  from GiaSanPham gsp where gsp.MaSP = ?";
+    String getLoaiSP = "select sp.LoaiSP  from SanPham sp";
 
     SanPhamDao spDAO = new SanPhamDao();
 
+        public List<String> getLoaiSP() {
+        List<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+
+            try {
+
+                rs = JDBCHelper.executeQuery(getLoaiSP);
+                while (rs.next()) {
+                  
+                        String loaisp = rs.getString("LoaiSP");
+                    
+                    list.add(loaisp);
+                }
+            } finally {
+//                rs.getStatement().getConnection().close();
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    
     public float getGiaSP(int masp) {
         float gia = 0;
         ResultSet rs = null;

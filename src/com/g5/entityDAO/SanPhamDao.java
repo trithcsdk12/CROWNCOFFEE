@@ -86,7 +86,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
 
     public List<SanPham> selectByName(String keyword) {
 
-        return select(searchName, "%" + keyword + "%");
+        return select(searchName, "%" + keyword.trim() + "%");
     }
 
     public List<String> getSize2(Integer maSP) {
@@ -132,7 +132,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
     public float getGiaByMaSPAndSize(int maSP, String size) {
         float gia = 0.0f;
         try {
-            ResultSet rs = JDBCHelper.executeQuery("SELECT Gia FROM GiaSanPham WHERE MaSP = ? AND Size = ?", maSP, size);
+            ResultSet rs = JDBCHelper.executeQuery("SELECT Gia FROM GiaSanPham WHERE MaSP = ? AND Size = ?", maSP, size.trim());
             if (rs.next()) {
                 gia = rs.getFloat("Gia");
             }

@@ -6,6 +6,7 @@
 package com.g5.ok;
 
 import com.g5.entityDAO.SanPhamDao;
+import javax.swing.UIManager;
 
 /**
  *
@@ -196,14 +197,13 @@ public class SoLuongJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-        //    java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()
-        //    ).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-        //    java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-        //    java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        //    java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoLuongJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -212,7 +212,7 @@ public class SoLuongJDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SoLuongJDialog dialog = new SoLuongJDialog(new javax.swing.JFrame(), true,0);
+                SoLuongJDialog dialog = new SoLuongJDialog(new javax.swing.JFrame(), true,1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -14,6 +14,7 @@ import com.g5.util.Auth;
 import com.g5.util.JDBCHelper;
 import com.g5.util.XImage;
 import com.g5.util.TextMes;
+import com.g5.util.Validate;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -111,6 +112,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             List<SanPham> list = dao.getAll();
             int i = 0;
             for (SanPham sp : list) {
+                String gianguyenlieu = Validate.chuyenGiaVietNam(sp.getGiaNguyenLieu());
                 Object row[] = {
                     ++i,
                     sp.getMaSP(),
@@ -120,7 +122,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                     sp.getMoTa(),
                     sp.getHinh(),
                     sp.getLoaiSP(),
-                    sp.getGiaNguyenLieu()
+                    gianguyenlieu
+                //   sp.getGiaNguyenLieu()
                 };
                 model.addRow(row);
             }
@@ -149,14 +152,17 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         try {
             List<GiaSP> list = daoCT.selectByID(Integer.parseInt(txtMaSP1.getText()));
             int i = 0;
+
             for (GiaSP sp : list) {
+                String giasanpham = Validate.chuyenGiaVietNam(sp.getGia());
+
                 Object row[] = {
                     //                    sp.getMaGSP(),
                     //   sp.getMaSP(),
                     ++i,
                     tenSP,
                     sp.getSize(),
-                    sp.getGia()
+                    giasanpham
                 };
                 model.addRow(row);
             }
@@ -174,23 +180,23 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         String tenSP = "";
         try {
-            tenSP = (String) tblSanPham.getValueAt(this.row, 2);
+            tenSP = txtTenSP.getText().trim();
         } catch (Exception e) {
             return;
         }
-        
-        
+
         try {
             List<GiaSP> list = daoCT.selectByID(Integer.parseInt(txtMaSP.getText()));
             int i = 0;
             for (GiaSP sp : list) {
+                String giasanpham = Validate.chuyenGiaVietNam(sp.getGia());
                 Object row[] = {
                     //                    sp.getMaGSP(),
                     //   sp.getMaSP(),
                     ++i,
                     tenSP,
                     sp.getSize(),
-                    sp.getGia()
+                    giasanpham
                 };
                 model.addRow(row);
             }
@@ -230,7 +236,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
     }
 
     void editSP() {
-        Integer maSP = (Integer) tblSanPham.getValueAt(this.row, 0);
+        Integer maSP = (Integer) tblSanPham.getValueAt(this.row, 1);
         SanPham sp = dao.getByID(maSP);
         txtMaSP1.setText(sp.getMaSP() + "");
         this.setFormSP(sp);
@@ -273,7 +279,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
             lblHinh.setIcon(scaledIcon);
         }
-        txtGiaNL.setText(String.valueOf(sp.getGiaNguyenLieu()));
+        String formattedValue = String.format("%.0f", sp.getGiaNguyenLieu());
+
+        //   System.out.println("Formatted Value: " + formattedValue);
+        txtGiaNL.setText(formattedValue);
     }
 
     void firstCT() {
@@ -338,8 +347,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             } else {
                 txtSize.setSelectedIndex(0);
             }
+            String formattedValue = String.format("%.0f", dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
 
-            txtGia1.setText("" + dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
+            //   System.out.println("Formatted Value: " + formattedValue);
+            txtGia1.setText(formattedValue);
 
         }
     }
@@ -407,7 +418,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
     }
 
     public void selectImage() {
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser("src\\com\\g5\\image");
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             if (XImage.save(file)) {
@@ -475,7 +486,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         if (list.size() > 0) {
 
             txtSize.setSelectedIndex(0);
-            txtGia1.setText("" + dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
+            String formattedValue = String.format("%.0f", dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
+            txtGia1.setText(formattedValue);
         }
 
         fillTableSPCT();
@@ -1518,7 +1530,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
 
     private void btnMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoi1ActionPerformed
         // TODO add your handling code here:
-        clearCT();
+        //  clearCT();
+        fillTableSPCT();
         btnThem1.setEnabled(true);
         txtGia1.requestFocus();
         resetIdentity();
@@ -1529,7 +1542,9 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         if (txtSize.getSelectedIndex() == -1) {
             return;
         }
-        txtGia1.setText("" + dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
+        String formattedValue = String.format("%.0f", dao.getGiaByMaSPAndSize(Integer.parseInt(txtMaSP1.getText().trim()), txtSize.getSelectedItem().toString().trim()));
+
+        txtGia1.setText(formattedValue);
     }
 
 

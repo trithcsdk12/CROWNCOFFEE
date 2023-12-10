@@ -70,7 +70,7 @@ public class ItemSoLuong extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SoLuongJDialog.setSoLuongDC(getSoLuong());
-             //   SoLuongJDialog.Xuat();
+                ManChinh.loadCacSP();
             }
 
         });
