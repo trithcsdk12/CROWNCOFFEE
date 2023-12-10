@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  *
  * @author anhba
  */
-public class SanPhamClone extends javax.swing.JPanel {
+public class ItemSanPham extends javax.swing.JPanel {
 
     final int w = 180;
     final int h = 220;
@@ -75,7 +75,7 @@ public class SanPhamClone extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
-    public SanPhamClone() {
+    public ItemSanPham() {
         initComponents();
         //   setOpaque(false);
         txtThongTin.setLineWrap(true);
@@ -149,7 +149,7 @@ public class SanPhamClone extends javax.swing.JPanel {
     }
 
     public void addSuKien() {
-        SanPhamClone.this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ItemSanPham.this.setCursor(new Cursor(Cursor.HAND_CURSOR));
         txtAnh.setCursor(new Cursor(Cursor.HAND_CURSOR));
         txtThongTin.setCursor(new Cursor(Cursor.HAND_CURSOR));
 

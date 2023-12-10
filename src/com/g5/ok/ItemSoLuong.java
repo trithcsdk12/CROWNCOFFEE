@@ -6,6 +6,10 @@
 package com.g5.ok;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
 /**
@@ -17,6 +21,7 @@ public class ItemSoLuong extends javax.swing.JPanel {
     JButton btn = new JButton();
     int w = 50;
     int h = 50;
+    public int soluong = 0;
 
     /**
      * Creates new form NewJPanel
@@ -25,6 +30,14 @@ public class ItemSoLuong extends javax.swing.JPanel {
         initComponents();
 
         this.add(btn);
+    }
+
+    public void setSoLuong(int sl) {
+        this.soluong = sl;
+    }
+
+    public int getSoLuong() {
+        return this.soluong;
     }
 
     public void loadSize() {
@@ -50,6 +63,17 @@ public class ItemSoLuong extends javax.swing.JPanel {
         btn.setSize(new Dimension(w, h));
         btn.setText("");
         btn.setText(text);
+    }
+
+    public void addSuKien() {
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SoLuongJDialog.setSoLuongDC(getSoLuong());
+             //   SoLuongJDialog.Xuat();
+            }
+
+        });
     }
 
     /**

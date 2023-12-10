@@ -21,6 +21,7 @@ public class TextMes {
 
     public static void Alert(Component comp, String text) {
 
+
         UIManager.put("OptionPane.messageForeground", Color.BLACK);
         UIManager.put("OptionPane.messageFont", new Font("Tohama", Font.BOLD, 14));
         UIManager.put("OptionPane.okButtonText", "Oke");
