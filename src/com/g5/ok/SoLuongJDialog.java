@@ -5,7 +5,9 @@
  */
 package com.g5.ok;
 
+import com.g5.entity.SanPham;
 import com.g5.entityDAO.SanPhamDao;
+import com.g5.util.TextMes;
 import javax.swing.UIManager;
 
 /**
@@ -18,7 +20,7 @@ public class SoLuongJDialog extends javax.swing.JDialog {
     ItemSanPham daoSPClone = new ItemSanPham();
     PanelSoluong panelView = new PanelSoluong();
     public static int soLuongDuocChon = 0;
-    int masp = 0;
+    public int masp = 0;
 
     /**
      * Creates new form NewJDialog
@@ -27,6 +29,7 @@ public class SoLuongJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.masp = masp;
         jScrollPane1.setViewportView(panelView);
         new Thread(new Runnable() {
             @Override
@@ -79,8 +82,8 @@ public class SoLuongJDialog extends javax.swing.JDialog {
                     }
 
                     ItemSoLuong sl = new ItemSoLuong();
-                    sl.setW(45);
-                    sl.setH(45);
+                    sl.setW(60);
+                    sl.setH(60);
                     sl.loadSize();
                     sl.setText((i + 1) + "");
                     sl.setSoLuong((i + 1));
@@ -150,9 +153,9 @@ public class SoLuongJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSoLuongChon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSoLuongChon, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,6 +175,11 @@ public class SoLuongJDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        SanPham sp = daoSP.getByID(masp);
+        if(sp.getSoLuong() < Integer.parseInt(txtSoLuongChon.getText())){
+            TextMes.Alert(null, "Không đủ số lượng");
+            return;
+        }
         try {
             SoLuongJDialog.setSoLuongDC(Integer.parseInt(txtSoLuongChon.getText()));
         } catch (Exception e) {

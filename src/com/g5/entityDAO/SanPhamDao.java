@@ -40,7 +40,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
     String searchMaSP = "select * from sanpham where masp like ?";
     String searchName = "select * from sanpham where tensp like ?";
     String upSoluongbitrung = "update hoadonchitiet set soluong = ? where mahd = ? and masp = ? and size = ?";
-    String selectSoluongSP = "select soluongsp from sanpham where masp = ?";
+    String selectSoluongSP = "select soluong from hoadonchitiet where masp = ? and size = ?";
     String getSoLuongSP = "select SanPham.SoLuongSP from SanPham where masp = ?";
 
     public int getSoLuongSP(int masp) {
@@ -72,6 +72,7 @@ public class SanPhamDao implements SanPhamDAOinterface {
     public void upSoluongBiTrung(int soluong, int mahd, int masp, String size) {
         int sl = 0;
         sl = getSL(masp, size) + soluong;
+  
         try {
             JDBCHelper.executeUpdate(upSoluongbitrung, sl, mahd, masp, size.trim());
         } catch (Exception e) {

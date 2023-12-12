@@ -70,7 +70,8 @@ public class ItemSoLuong extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SoLuongJDialog.setSoLuongDC(getSoLuong());
-                ManChinh.loadCacSP();
+//                ManChinh.loadList();
+//                ManChinh.loadSoLuong();
             }
 
         });
@@ -89,11 +90,11 @@ public class ItemSoLuong extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

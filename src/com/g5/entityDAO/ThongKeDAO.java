@@ -30,8 +30,8 @@ public class ThongKeDAO {
                         rs.getDouble("tiecaonhat"),
                         rs.getDouble("tienthapnhat"),
                         rs.getDouble("tientb"),
-                        rs.getDouble("loinhuan"),
-                        rs.getDouble("tongtien")
+                        rs.getDouble("tongtien"),
+                        rs.getDouble("loinhuan")
                     };
                     list.add(model);
                 }
@@ -52,8 +52,12 @@ public class ThongKeDAO {
             try {
                 String sql = "{call sp_ThongKeSanPham}";
                 rs = JDBCHelper.executeQuery(sql);
+                int i = 0;
+
                 while (rs.next()) {
+
                     Object[] model = {
+                        ++i,
                         rs.getString("TenSanPham"),
                         rs.getInt("SoLuongNhapVao"),
                         rs.getInt("SoLuongTonKho"),

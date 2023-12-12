@@ -15,6 +15,7 @@ import com.g5.util.JDBCHelper;
 import com.g5.util.XImage;
 import com.g5.util.TextMes;
 import com.g5.util.Validate;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -66,6 +67,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         //    firstCT();
         tblSanPham.getTableHeader().setFont(new Font("Tohoma", 1, 16));
         tblChiTiet.getTableHeader().setFont(new Font("Tohoma", 1, 16));
+        tblSanPham.getTableHeader().setBackground(new Color(32, 136, 203));
+        tblChiTiet.getTableHeader().setForeground(new Color(255, 255, 255));
         btnSua.setEnabled(false);
         btnXoa.setEnabled(false);
         btnSua1.setEnabled(false);
@@ -770,8 +773,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             }
         });
         tblChiTiet.setFocusable(false);
+        tblChiTiet.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblChiTiet.setRowHeight(30);
-        tblChiTiet.setSelectionBackground(new java.awt.Color(255, 102, 255));
+        tblChiTiet.setSelectionBackground(new java.awt.Color(102, 255, 102));
+        tblChiTiet.setShowVerticalLines(false);
         tblChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 tblChiTietMouseExited(evt);
@@ -827,8 +832,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
             }
         });
         tblSanPham.setFocusable(false);
+        tblSanPham.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblSanPham.setRowHeight(30);
-        tblSanPham.setSelectionBackground(new java.awt.Color(255, 102, 255));
+        tblSanPham.setSelectionBackground(new java.awt.Color(102, 255, 102));
+        tblSanPham.setShowVerticalLines(false);
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseClicked(evt);

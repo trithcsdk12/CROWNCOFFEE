@@ -10,6 +10,7 @@ import com.g5.util.JDBCHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,8 +25,15 @@ public class HoaDonChiTietDAO {
             + "values (?,?,?,?,?,?)";
     String update = "Update HoaDonChiTiet set MaHD=?, MaSP=?, SoLuong=?, Gia=?, Size=?, PTKhuyenMai=? where MaSP =?";
     String selectByIDHD = "select * from HoaDonChiTiet where MaSP = ?";
-    String delete = "Delete from HoaDonChiTiet where MaSP = ?";
+    String delete = "Delete from HoaDonChiTiet where MaSP= ?";
+    String delete2 = "Delete from HoaDonChiTiet where MaSP= ? and mahd = ?";
     String spTrung = "SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS TimThay FROM HoaDonChiTiet hdct WHERE hdct.mahd = ? and hdct.MaSP = ? AND hdct.Size = ?";
+
+    String xnThem = "SELECT * FROM hoadonchitiet WHERE masp NOT IN (?) and mahd = ?";
+
+    public List<HoaDonChiTiet> getHDCTkhongco(int masp, int mahd) {
+        return select(xnThem, masp, mahd);
+    }
 
     public int getSPbiTrung(int mahd, int masp, String size) {
         ResultSet rs = null;
@@ -91,6 +99,26 @@ public class HoaDonChiTietDAO {
 
     public void deteleByID(Integer id) {
         JDBCHelper.executeUpdate(delete, id);
+    }
+
+    public void update2(HoaDonChiTiet hd, int mahd) {
+
+        try {
+            JDBCHelper.executeUpdate(update, mahd,
+                    hd.getMaSP(),
+                    hd.getSoluong(),
+                    hd.getGia(),
+                    hd.getSize(),
+                    hd.getPTkhuyenmai(),
+                    hd.getMaSP()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deteleByID2(int mahd) {
+        JDBCHelper.executeUpdate(delete, mahd);
     }
 
     public List<HoaDonChiTiet> getALL() {

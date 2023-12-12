@@ -10,10 +10,11 @@ import com.g5.component.EventMenuSelected;
 import com.g5.form.HoaDonJPanel;
 import com.g5.form.NhanVienJPanel;
 import com.g5.form.SanPhamJPanel;
-import com.g5.form.ThongKeJPanel;
+
 import com.g5.form.TrangChuJPanel;
 import com.g5.component.Model_Menu;
 import com.g5.form.KhuyenMaiJpanel;
+import com.g5.form.ThongKeJPanel;
 import com.g5.util.Auth;
 import com.g5.util.TextMes;
 import java.awt.BorderLayout;
@@ -233,6 +234,11 @@ public class MainFrame extends javax.swing.JFrame {
                     showForm(new KhuyenMaiJpanel());
                 }
                 if (index == 4) {
+                    if (Auth.user.getVaitro() == 0) {
+                        showForm(new TrangChuJPanel());
+                        TextMes.Alert(null, "Bạn không có quyền truy cập");
+                        return;
+                    }
                     showForm(new ThongKeJPanel());
                 }
                 if (index == 5) {

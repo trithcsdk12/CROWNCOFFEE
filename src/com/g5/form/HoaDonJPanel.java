@@ -14,6 +14,8 @@ import com.g5.entityDAO.HoaDonDAO;
 import com.g5.entityDAO.KhuyenMaiDAO;
 import com.g5.entityDAO.NhanVienDAOImpl;
 import com.g5.entityDAO.SanPhamDao;
+import com.g5.ok.ManChinh;
+import com.g5.ok.MuaSanPhamJDialog;
 import com.g5.util.Auth;
 import com.g5.util.ExcelUtil;
 import com.g5.util.JDBCHelper;
@@ -100,12 +102,13 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, center);
-        table.getTableHeader().setBackground(Color.red);
+   //     table.getTableHeader().setBackground(Color.red);
         table.getTableHeader().setFont(new Font("Tohoma", Font.BOLD, 18));
-        table.setOpaque(false);
+      //  table.setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(new Color(255, 255, 255));
-        table.setRowHeight(25);
+        table.setRowHeight(30);
+    //    table.setOpaque(false);
     }
 
     private static void autoResizeColumns(JTable table) {
@@ -239,6 +242,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
@@ -448,6 +452,13 @@ public class HoaDonJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -457,9 +468,11 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel16)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel16)))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -547,12 +560,17 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                             .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
                             .addComponent(jLabel1))))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnInsert, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNew, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInsert, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNew, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -656,7 +674,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "TRẠNG THÁI", "MÃ HD", "NGÀY TẠO", "MÃ NV", "GHI CHÚ"
+                "STT", "Trạng thái", "Mã HD", "Ngày tạo", "Mã NV", "Ghi chú"
             }
         ) {
             Class[] types = new Class [] {
@@ -677,7 +695,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         tblHoaDon.setFocusable(false);
         tblHoaDon.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblHoaDon.setRowHeight(25);
-        tblHoaDon.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tblHoaDon.setSelectionBackground(new java.awt.Color(102, 255, 102));
         tblHoaDon.setShowVerticalLines(false);
         tblHoaDon.getTableHeader().setReorderingAllowed(false);
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -998,7 +1016,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         tblHoaDonChiTiet.setFocusable(false);
         tblHoaDonChiTiet.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblHoaDonChiTiet.setRowHeight(30);
-        tblHoaDonChiTiet.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tblHoaDonChiTiet.setSelectionBackground(new java.awt.Color(102, 255, 102));
         tblHoaDonChiTiet.setShowVerticalLines(false);
         tblHoaDonChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1239,6 +1257,18 @@ public class HoaDonJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         moveLastHDCT();
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            if(txtMaHD.getText().trim().isEmpty()){
+            return;
+            }
+        } catch (Exception e) {
+            return;
+        }
+        new MuaSanPhamJDialog(null, true, Integer.parseInt(txtMaHD.getText())).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void chooseDirectoryToSave(Workbook workbook) {
         JFileChooser choose = new JFileChooser();
         int x = choose.showSaveDialog(null);
@@ -1276,6 +1306,7 @@ public class HoaDonJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboLoai;
     private javax.swing.JComboBox<String> cboSizeSP;
     private javax.swing.JComboBox<String> cboTenSP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

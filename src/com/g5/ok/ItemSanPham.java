@@ -36,14 +36,16 @@ public class ItemSanPham extends javax.swing.JPanel {
     public boolean selected = false;
     public String maspChon = "0";
     public float gia = 0;
-    public float giagiam =0;
+    public float giagiam = 0;
     public String loaisp = "";
     public int masp = 0;
     public String thongtin = "";
     public String tensp = "Tên SP";
     public String soluongMua = "0";
-    public String sizeMua = "0";
+    public String sizeMua = "";
     public String tongtienMua = "0";
+    public String giamua = "0";
+    public String ptkm = "0%";
 
     public void setThongTin(String tensp, String tt) {
         this.tensp = tensp;
@@ -55,6 +57,22 @@ public class ItemSanPham extends javax.swing.JPanel {
         txtThongTin.setText("");
         txtThongTin.setText(thongtin);
 
+    }
+
+    public String getPtkm() {
+        return ptkm;
+    }
+
+    public void setPtkm(String ptkm) {
+        this.ptkm = ptkm;
+    }
+
+    public String getGiamua() {
+        return giamua;
+    }
+
+    public void setGiamua(String giamua) {
+        this.giamua = giamua;
     }
 
     public String getSoluongMua() {
@@ -81,8 +99,6 @@ public class ItemSanPham extends javax.swing.JPanel {
         this.tongtienMua = tongtienMua;
     }
 
-    
-    
     public String getLoaisp() {
         return loaisp;
     }
@@ -106,8 +122,6 @@ public class ItemSanPham extends javax.swing.JPanel {
     public void setGiagiam(float giagiam) {
         this.giagiam = giagiam;
     }
-    
-    
 
     public String getTenSP() {
         return this.tensp;
@@ -115,6 +129,10 @@ public class ItemSanPham extends javax.swing.JPanel {
 
     public boolean getSelectdSP() {
         return this.selected;
+    }
+
+    public boolean setSelectdSP(boolean bl) {
+        return this.selected = bl;
     }
 
     public void setMaSP(int masp) {
@@ -140,14 +158,15 @@ public class ItemSanPham extends javax.swing.JPanel {
         Image resizedImage = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
-    
-     public ItemSanPham() {
-     
-     }
+
+    public ItemSanPham() {
+
+    }
 
     public ItemSanPham(ImageIcon icon) {
         initComponents();
         //   setOpaque(false);
+        
         txtAnh.setText("");
         try {
             if (icon != null) {
@@ -166,7 +185,7 @@ public class ItemSanPham extends javax.swing.JPanel {
 
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
                 txtAnh.setIcon(scaledIcon);
-           
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,72 +197,14 @@ public class ItemSanPham extends javax.swing.JPanel {
 //        }
         txtThongTin.setLineWrap(true);
         txtThongTin.setWrapStyleWord(true);
+
         //  setOpaque(false);
         //loadImage();
-
+        this.repaint();
     }
 
-    public void selectImage() {
-        JFileChooser fileChooser = new JFileChooser("src\\com\\g5\\image");
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            System.out.println(fileChooser.getSelectedFile());
-            File file = fileChooser.getSelectedFile();
-
-            if (XImage.save(file)) {
-
-                try {
-                    System.out.println(file.toString());
-                    BufferedImage originalImage = ImageIO.read(new File(file.toString()));
-
-                    ImageIcon icon = new ImageIcon(originalImage);
-
-                    Image image = icon.getImage();
-
-                    Image scaledImage = image.getScaledInstance(w, h, Image.SCALE_DEFAULT);
-
-                    ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                    txtAnh.removeAll();
-                    txtAnh.setText("");
-                    txtAnh.setIcon(null);
-                    txtAnh.setToolTipText(file.getName());
-                    txtAnh.setIcon(scaledIcon);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-    }
-
-    public void loadImage() {
-
-        File imageFile = new File(XImage.urlImage(imageURL));
-
-        if (!imageFile.exists()) {
-            imageFile = new File(XImage.urlImage("null.png"));
-            System.out.println("Tập tin không tồn tại.");
-
-        }
-        try {
-            BufferedImage originalImage = ImageIO.read(imageFile);
-
-            ImageIcon icon = new ImageIcon(originalImage);
-
-            Image image = icon.getImage();
-
-            Image scaledImage = image.getScaledInstance(w, h, Image.SCALE_DEFAULT);
-            txtAnh.removeAll();
-            txtAnh.setText("");
-            txtAnh.setIcon(null);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
-            txtAnh.setToolTipText("");
-            txtAnh.setIcon(scaledIcon);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void setCheckBox(boolean bl) {
+        jCheckBox1.setSelected(bl);
     }
 
     public void addSuKien() {
@@ -253,15 +214,16 @@ public class ItemSanPham extends javax.swing.JPanel {
 
         jCheckBox1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                //  jCheckBox1.setSelected(!jCheckBox1.isSelected());
+                //      jCheckBox1.setSelected(!jCheckBox1.isSelected());
 
                 if (jCheckBox1.isSelected()) {
-                    selected = true;
+                    setSelectdSP(true);
                 } else {
-                    selected = false;
+                    setSelectdSP(false);
                 }
 
-                ManChinh.loadCacSP();
+                MuaSanPhamJDialog.loadList();
+         //       MuaSanPhamJDialog.loadSoLuong(); 
             }
         });
 
@@ -270,12 +232,14 @@ public class ItemSanPham extends javax.swing.JPanel {
                 jCheckBox1.setSelected(!jCheckBox1.isSelected());
 
                 if (jCheckBox1.isSelected()) {
-                    selected = true;
+                    setSelectdSP(true);
                 } else {
-                    selected = false;
+                    setSelectdSP(false);
                 }
 
-                ManChinh.loadCacSP();
+                MuaSanPhamJDialog.loadList();
+//                MuaSanPhamJDialog.loadSoLuong();
+               
             }
         });
         this.addMouseListener(new MouseAdapter() {
@@ -283,12 +247,15 @@ public class ItemSanPham extends javax.swing.JPanel {
                 jCheckBox1.setSelected(!jCheckBox1.isSelected());
 
                 if (jCheckBox1.isSelected()) {
-                    selected = true;
+                    setSelectdSP(true);
                 } else {
-                    selected = false;
+                    setSelectdSP(false);
                 }
 
-                ManChinh.loadCacSP();
+          
+                MuaSanPhamJDialog.loadList();
+       //         MuaSanPhamJDialog.loadSoLuong();
+                
             }
         });
     }

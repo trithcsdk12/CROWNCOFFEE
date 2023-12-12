@@ -697,7 +697,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "MÃ NV", "Tên NV", "Mật khẩu", "SÐT", "Email", "Giới tính", "Vai trò", "Ngày sinh", "Địa chỉ", "Trạng thái", "Hình"
+                "STT", "Mã NV", "Tên NV", "Mật khẩu", "SÐT", "Email", "Giới tính", "Vai trò", "Ngày sinh", "Địa chỉ", "Trạng thái", "Hình"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -711,7 +711,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         tblNhanVien.setFocusable(false);
         tblNhanVien.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblNhanVien.setRowHeight(30);
-        tblNhanVien.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tblNhanVien.setSelectionBackground(new java.awt.Color(102, 255, 102));
         tblNhanVien.setShowVerticalLines(false);
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

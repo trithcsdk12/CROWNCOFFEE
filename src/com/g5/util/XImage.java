@@ -61,6 +61,24 @@ public class XImage {
         }
     }
 
+    public static void selectImage2(String file, JLabel lbl,int width, int height) {
+        try {
+            //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));
+            lbl.setText("");
+            ImageIcon icon = new ImageIcon(XImage.class.getResource("/com/g5/image/" + file.trim()));
+
+            Image image = icon.getImage();
+
+            Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+            lbl.setIcon(scaledIcon);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void selectLogo(String file, JLabel lbl, int width, int height) {
         try {
             //   BufferedImage originalImage = ImageIO.read(new File(file.toString()));
